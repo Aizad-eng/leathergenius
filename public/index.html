@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeatherGenius</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 4rem auto; padding: 0 1rem; color: #3b2f2f; }
+    h1 { color: #6b4226; }
+    #status { padding: 0.5rem 1rem; background: #f5efe6; border-radius: 8px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <h1>LeatherGenius</h1>
+  <p>The Worker is live. API status: <span id="status">checking…</span></p>
+  <script>
+    fetch("/api/health")
+      .then((r) => r.json())
+      .then((d) => { document.getElementById("status").textContent = d.status + " (" + d.time + ")"; })
+      .catch(() => { document.getElementById("status").textContent = "unreachable"; });
+  </script>
+</body>
+</html>

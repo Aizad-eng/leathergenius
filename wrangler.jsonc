@@ -1,0 +1,10 @@
+{
+  "name": "leathergenius",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-15",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS"
+  }
+}
