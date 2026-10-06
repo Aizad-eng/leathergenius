@@ -403,7 +403,7 @@ h4, .h4 { font-size: var(--fs-h4); }
 @media (min-width: 400px) { .brand__logo { height: 34px; } }
 .brand__tag {
   margin-top: 6px;
-  margin-left: 39px;              /* aligns under the wordmark, past the mark */
+  margin-left: 54px;              /* aligns under the wordmark (≈1.81 × logo height) */
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -418,8 +418,8 @@ h4, .h4 { font-size: var(--fs-h4); }
   .brand__tag { letter-spacing: 0.07em; font-size: 9.5px; }
   .site-header .nav-toggle { padding: 8px 10px; }
 }
-@media (min-width: 400px) { .brand__tag { margin-left: 44px; } }
-@media (min-width: 900px) { .brand__logo { height: 40px; } .brand__tag { margin-left: 52px; font-size: 10.5px; } }
+@media (min-width: 400px) { .brand__tag { margin-left: 62px; } }
+@media (min-width: 900px) { .brand__logo { height: 40px; } .brand__tag { margin-left: 73px; font-size: 10.5px; } }
 .site-header.is-compact .brand__logo { height: 30px; }
 
 .nav { width: 100%; }
