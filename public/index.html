@@ -34,10 +34,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Inter:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap">
 
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="stylesheet" href="/assets/site.css?v=2">
-  <script src="/assets/site.js" defer></script>
+  <link rel="stylesheet" href="/assets/site.css?v=4">
+  <script src="/assets/site.js?v=3" defer></script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Leather Genius","url":"https://leathergenius.site/","logo":"https://leathergenius.site/apple-touch-icon.png","email":"queries@leathergenius.site","description":"Private-label manufacturer of leather jackets, bags and twill outerwear in Sialkot, Pakistan.","address":{"@type":"PostalAddress","addressLocality":"Sialkot","addressCountry":"PK"}}
+  {"@context":"https://schema.org","@type":"Organization","name":"Leather Genius","url":"https://leathergenius.site/","sameAs":["https://www.linkedin.com/company/leather-genius/"],"logo":"https://leathergenius.site/apple-touch-icon.png","email":"queries@leathergenius.site","description":"Private-label manufacturer of leather jackets, bags and twill outerwear in Sialkot, Pakistan.","address":{"@type":"PostalAddress","addressLocality":"Sialkot","addressCountry":"PK"}}
   </script>
 </head>
 <body>
@@ -90,11 +90,15 @@
         </div>
 
         <div class="hero__media">
-          <figure class="hero__frame">
-            <img class="hero__img" src="/images/hero-a2-bomber.jpg" alt="Vintage brown lambskin A2 bomber jacket with rib hem and cuffs" width="474" height="470" fetchpriority="high">
+          <figure class="hero__frame leather leather--oxblood stitched">
+            <span class="hero__crest" aria-hidden="true"><span class="deboss"><i></i></span></span>
+            <span class="hero__label leather leather--vegtan" aria-hidden="true"><span class="hero__label-k">Style</span><span class="hero__label-v">LG-201</span></span>
+            <div class="hero__plate">
+              <img class="hero__img" src="/images/hero-a2-bomber.jpg" alt="Vintage brown lambskin A2 bomber jacket with rib hem and cuffs" width="474" height="470" fetchpriority="high">
+            </div>
             <figcaption class="hero__caption">Lambskin A2 bomber · from the catalogue</figcaption>
           </figure>
-          <aside class="spec-card" aria-label="What you lock at the sample stage">
+          <aside class="spec-card stitched stitched--tan" aria-label="What you lock at the sample stage">
             <div class="spec-card__title"><strong>Your spec, locked</strong><span class="label">Sample stage</span></div>
             <div class="spec-card__row"><span class="spec-card__k">Hide</span><span class="spec-card__v">Named leather, weight and finish</span></div>
             <div class="spec-card__row"><span class="spec-card__k">Lining</span><span class="spec-card__v">Bemberg or quilted</span></div>
@@ -193,7 +197,7 @@
   </section>
 
   <!-- ATELIER -->
-  <section class="section section--rule" aria-labelledby="atelier-title">
+  <section class="section band--leather leather leather--espresso" aria-labelledby="atelier-title">
     <div class="container">
       <div class="atelier">
         <div>
@@ -230,7 +234,7 @@
 
       <div class="grid grid--4">
         <article class="swatch-card">
-          <div class="swatch-card__swatch swatch--lamb" role="presentation"></div>
+          <div class="swatch-card__swatch swatch--lamb" role="presentation"><span class="swatch-card__tag" aria-hidden="true">No. 01</span></div>
           <div class="swatch-card__body">
             <span class="swatch-card__weight">0.7–0.9 mm</span>
             <h3 class="swatch-card__name">Lambskin</h3>
@@ -238,7 +242,7 @@
           </div>
         </article>
         <article class="swatch-card">
-          <div class="swatch-card__swatch swatch--cow" role="presentation"></div>
+          <div class="swatch-card__swatch swatch--cow" role="presentation"><span class="swatch-card__tag" aria-hidden="true">No. 02</span></div>
           <div class="swatch-card__body">
             <span class="swatch-card__weight">1.1–1.4 mm</span>
             <h3 class="swatch-card__name">Cowhide &amp; steer</h3>
@@ -246,7 +250,7 @@
           </div>
         </article>
         <article class="swatch-card">
-          <div class="swatch-card__swatch swatch--suede" role="presentation"></div>
+          <div class="swatch-card__swatch swatch--suede" role="presentation"><span class="swatch-card__tag" aria-hidden="true">No. 03</span></div>
           <div class="swatch-card__body">
             <span class="swatch-card__weight">Pebble &amp; nap</span>
             <h3 class="swatch-card__name">Goat &amp; suede</h3>
@@ -254,7 +258,7 @@
           </div>
         </article>
         <article class="swatch-card">
-          <div class="swatch-card__swatch swatch--twill" role="presentation"></div>
+          <div class="swatch-card__swatch swatch--twill" role="presentation"><span class="swatch-card__tag" aria-hidden="true">No. 04</span></div>
           <div class="swatch-card__body">
             <span class="swatch-card__weight">10–14 oz</span>
             <h3 class="swatch-card__name">Twill &amp; canvas</h3>
@@ -317,6 +321,7 @@
           <p class="section-head__intro">Per-unit pricing is a landed cost, quoted after you approve the sample.</p>
           <a class="btn btn--primary section-head__link mt-4" href="/sample/">Request a free sample</a>
         </div>
+        <div class="stitched-card stitched stitched--tan">
         <table class="spec-table spec-table--stack">
           <caption class="visually-hidden">Sample, order and payment terms</caption>
           <tbody>
@@ -330,6 +335,7 @@
             <tr><th scope="row">Quality control</th><td>Pre-shipment inspection on every run</td></tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   </section>
@@ -373,7 +379,8 @@
   <!-- CTA -->
   <section class="cta-band" aria-labelledby="cta-title">
     <div class="container">
-      <div class="cta-band__inner">
+      <div class="cta-band__inner leather leather--oxblood stitched">
+        <span class="deboss cta-band__deboss" aria-hidden="true"><i></i></span>
         <div>
           <h2 id="cta-title" class="cta-band__title">Send us a style. We'll send back a sample.</h2>
           <p class="cta-band__text mt-4">Mail a piece you already sell, or describe it. We build it in Sialkot and courier it to you free. No fee, no commitment.</p>
@@ -388,11 +395,11 @@
 
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer leather leather--espresso">
   <div class="container">
     <div class="site-footer__grid">
       <div class="site-footer__brand">
-        <a href="/" aria-label="Leather Genius, home"><img class="site-footer__logo" src="/images/logo-light.svg" alt="Leather Genius" width="314" height="40" loading="lazy"></a>
+        <a class="site-footer__mark" href="/" aria-label="Leather Genius, home"><span class="deboss deboss--word" aria-hidden="true"><i></i></span></a>
         <p class="site-footer__about">Private-label leather jackets, bags and twill outerwear, made to your spec in Sialkot, Pakistan. First sample built free and shipped free.</p>
       </div>
       <nav class="site-footer__col" aria-label="Catalogue">
@@ -422,6 +429,7 @@
           <a class="site-footer__email" href="mailto:queries@leathergenius.site">queries@leathergenius.site</a>
           <span>Replies within 24 hours, weekdays.</span>
           <span>Sialkot atelier, operations remote.</span>
+          <a class="site-footer__social" href="https://www.linkedin.com/company/leather-genius/" rel="noopener" target="_blank">Leather Genius on LinkedIn <span aria-hidden="true">↗</span></a>
           <!-- TODO(owner): add the workshop street address in Sialkot here (one line). -->
           <!-- TODO(owner): add a phone / WhatsApp number here, e.g. <a href="tel:+92...">+92 ...</a> -->
         </address>

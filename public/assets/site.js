@@ -58,3 +58,55 @@
     if (path !== "/" && here.indexOf(path) === 0) links[i].setAttribute("aria-current", "page");
   }
 })();
+
+/* Saddle stitching: swap the dashed CSS fallback on .stitched elements for an
+   SVG thread, and sew stitched frames and .sew lines in as they scroll into
+   view (a conic mask sweeps round the frame, see site.css section 25).
+   Without JS, or with reduced motion, the stitches simply show. */
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canWatch = "IntersectionObserver" in window && !reduce;
+  var mk = function (tag, cls, attrs) {
+    var el = document.createElementNS(NS, tag);
+    if (cls) el.setAttribute("class", cls);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  };
+
+  var frames = document.querySelectorAll(".stitched");
+  for (var i = 0; i < frames.length; i++) {
+    var host = frames[i];
+    var rx = parseFloat(getComputedStyle(host).getPropertyValue("--stitch-r")) || 3;
+    var geo = { x: 2, y: 2, width: "100%", height: "100%", rx: rx, ry: rx };
+    var svg = mk("svg", "stitch-svg", { "aria-hidden": "true", focusable: "false" });
+    svg.appendChild(mk("rect", "stitch-svg__shadow", geo));
+    svg.appendChild(mk("rect", "stitch-svg__thread", geo));
+    host.appendChild(svg);
+    host.classList.add("has-stitch");
+    if (canWatch) host.classList.add("sew-pending");
+  }
+
+  /* Stitch lines drawn by pseudo-elements: sew them in too. */
+  var tag = function (sel, cls) {
+    var els = document.querySelectorAll(sel);
+    for (var t = 0; t < els.length; t++) els[t].classList.add(cls);
+  };
+  if (canWatch) {
+    tag(".site-footer, .feature, .section--rule, .band--leather", "sew-before");
+    tag(".page-hero, .band--leather", "sew-after");
+  }
+  var targets = document.querySelectorAll(".sew, .sew-before, .sew-after, .stitched");
+  var finish = function (el) { el.classList.add("is-sewn"); el.classList.remove("sew-pending"); };
+  if (!canWatch) {
+    for (var j = 0; j < targets.length; j++) finish(targets[j]);
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { io.unobserve(en.target); finish(en.target); }
+    });
+  }, { threshold: 0.2, rootMargin: "0px 0px -6% 0px" });
+  for (var k = 0; k < targets.length; k++) io.observe(targets[k]);
+})();

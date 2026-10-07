@@ -34,8 +34,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Inter:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap">
 
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="stylesheet" href="/assets/site.css?v=2">
-  <script src="/assets/site.js" defer></script>
+  <link rel="stylesheet" href="/assets/site.css?v=4">
+  <script src="/assets/site.js?v=3" defer></script>
   <style>
     /* catalogue page only */
     .cat-filter { padding: var(--s-5) 0; border-bottom: var(--border); background: var(--c-paper); }
@@ -91,6 +91,7 @@
   <!-- Page hero -->
   <section class="page-hero" aria-labelledby="page-title">
     <div class="container">
+      <div class="offcut leather leather--oxblood" aria-hidden="true"><span class="deboss"><i></i></span></div>
       <nav aria-label="Breadcrumb">
         <ol class="breadcrumb">
           <li><a href="/">Home</a></li>
@@ -538,7 +539,8 @@
   <!-- CTA -->
   <section class="cta-band" aria-labelledby="cta-title">
     <div class="container">
-      <div class="cta-band__inner">
+      <div class="cta-band__inner leather leather--oxblood stitched">
+        <span class="deboss cta-band__deboss" aria-hidden="true"><i></i></span>
         <div>
           <h2 id="cta-title" class="cta-band__title">Pick a style. We'll build it with your label.</h2>
           <p class="cta-band__text mt-4">Tell us the style code, or send your own. We build the first piece in Sialkot and courier it to you free. No fee, no commitment.</p>
@@ -554,11 +556,11 @@
 </main>
 
 <!-- ===================== FOOTER ===================== -->
-<footer class="site-footer">
+<footer class="site-footer leather leather--espresso">
   <div class="container">
     <div class="site-footer__grid">
       <div class="site-footer__brand">
-        <a href="/" aria-label="Leather Genius, home"><img class="site-footer__logo" src="/images/logo-light.svg" alt="Leather Genius" width="314" height="40" loading="lazy"></a>
+        <a class="site-footer__mark" href="/" aria-label="Leather Genius, home"><span class="deboss deboss--word" aria-hidden="true"><i></i></span></a>
         <p class="site-footer__about">Private-label leather jackets, bags and twill outerwear, made to your spec in Sialkot, Pakistan. First sample built free and shipped free.</p>
       </div>
       <nav class="site-footer__col" aria-label="Catalogue">
@@ -588,6 +590,7 @@
           <a class="site-footer__email" href="mailto:queries@leathergenius.site">queries@leathergenius.site</a>
           <span>Replies within 24 hours, weekdays.</span>
           <span>Sialkot atelier, operations remote.</span>
+          <a class="site-footer__social" href="https://www.linkedin.com/company/leather-genius/" rel="noopener" target="_blank">Leather Genius on LinkedIn <span aria-hidden="true">↗</span></a>
           <!-- TODO(owner): add the workshop street address in Sialkot here (one line). -->
           <!-- TODO(owner): add a phone / WhatsApp number here, e.g. <a href="tel:+92...">+92 ...</a> -->
         </address>

@@ -50,6 +50,13 @@
    23. Utilities ......... .visually-hidden, .text-center, .mt-0/.mt-4/.mt-6/
                            .mt-8, .mb-0, .maxw-prose, .hide-sm, .show-sm
    24. Responsive ........ breakpoints: 600px, 900px, 1100px
+   25. Leather layer ..... texture tokens (--tx-*), .leather (+ --oxblood
+                           --espresso --cognac --suede --vegtan), .stitched
+                           (+ .stitch-svg injected by JS), .stitch-rule (sews in
+                           on scroll), .deboss (+ __mark __word), hero folio
+                           (.hero__plate .hero__label), leather buttons, eyebrow
+                           tab, swatch cards (punch hole + tag), product hang
+                           tag, rivets, leather bands (.band--leather), footer
    ========================================================================== */
 
 /* 1. Tokens ---------------------------------------------------------------- */
@@ -1032,6 +1039,8 @@ h4, .h4 { font-size: var(--fs-h4); }
 .site-footer__list { display: grid; gap: var(--s-3); }
 .site-footer__col--contact { grid-column: 1 / -1; }
 .site-footer__email { font-family: var(--f-serif); font-size: 1.375rem; line-height: 1.3; color: var(--c-on-dark); overflow-wrap: anywhere; }
+.site-footer a.site-footer__social { justify-self: start; color: var(--c-on-dark); text-decoration: underline; text-decoration-color: rgba(237, 228, 214, .35); text-underline-offset: 4px; }
+.site-footer a.site-footer__social:hover { text-decoration-color: currentColor; }
 .site-footer__bottom {
   margin-top: var(--s-8);
   padding-top: var(--s-5);
@@ -1071,3 +1080,476 @@ h4, .h4 { font-size: var(--fs-h4); }
   .btn { white-space: normal; text-align: center; }
   .hero__actions .btn { width: 100%; }
 }
+
+/* 25. Leather layer --------------------------------------------------------
+   Real hide textures (512px seamless tiles in /images/texture/), saddle
+   stitching, blind debossing and hang tags. Every textured surface has a
+   solid colour underneath, so a missing tile still renders cleanly. Small
+   text never sits on raw grain: those surfaces carry a veil (--veil). */
+:root {
+  --tx-paper: url("/images/texture/paper-grain.webp");
+  --tx-oxblood: url("/images/texture/oxblood-pebble.jpg");
+  --tx-espresso: url("/images/texture/espresso-calf.jpg");
+  --tx-suede: url("/images/texture/tan-suede.jpg");
+  --tx-vegtan: url("/images/texture/natural-vegtan.jpg");
+  --tx-cognac: url("/images/texture/cognac-pebble.jpg");
+  --tx-size: 200px;
+
+  --thread-light: #E9D2AA;
+  --thread-dark: #7C2B24;
+  --thread-tan: #B0855A;
+
+  /* saddle-stitch tiles (one slanted stitch + its shadow) */
+  --stitch-x-light: url("/images/texture/stitch.svg");
+  --stitch-x-dark: url("/images/texture/stitch-dark.svg");
+  --stitch-y-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='11'%3E%3Cpath d='M3.6 2.4 4.8 8.6' stroke='%237C2B24' stroke-opacity='.8' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+@supports (background-image: image-set(url("a.webp") type("image/webp"))) {
+  :root {
+    --tx-oxblood: image-set(url("/images/texture/oxblood-pebble.webp") type("image/webp"), url("/images/texture/oxblood-pebble.jpg") type("image/jpeg"));
+    --tx-espresso: image-set(url("/images/texture/espresso-calf.webp") type("image/webp"), url("/images/texture/espresso-calf.jpg") type("image/jpeg"));
+    --tx-suede: image-set(url("/images/texture/tan-suede.webp") type("image/webp"), url("/images/texture/tan-suede.jpg") type("image/jpeg"));
+    --tx-vegtan: image-set(url("/images/texture/natural-vegtan.webp") type("image/webp"), url("/images/texture/natural-vegtan.jpg") type("image/jpeg"));
+    --tx-cognac: image-set(url("/images/texture/cognac-pebble.webp") type("image/webp"), url("/images/texture/cognac-pebble.jpg") type("image/jpeg"));
+  }
+}
+
+/* Paper grain on the page and tinted sections */
+body { background: var(--c-paper) var(--tx-paper) repeat; background-size: 512px 512px; }
+.section--tint { background-color: var(--c-paper-2); background-image: linear-gradient(rgba(239, 231, 218, .86), rgba(239, 231, 218, .86)), var(--tx-paper); background-size: 100% 100%, 512px 512px; }
+
+/* Leather surfaces --------------------------------------------------------- */
+.leather {
+  --tx: none;
+  --leather-c: #5E1B1B;
+  --veil: linear-gradient(transparent, transparent);
+  background-color: var(--leather-c);
+  background-image:
+    var(--veil),
+    radial-gradient(130% 90% at 12% 0%, rgba(255, 236, 214, .13), transparent 55%),
+    radial-gradient(120% 110% at 100% 100%, rgba(0, 0, 0, .32), transparent 62%),
+    var(--tx);
+  background-size: 100% 100%, 100% 100%, 100% 100%, var(--tx-size) var(--tx-size);
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  color: #F6E9DD;
+}
+.leather--oxblood  { --tx: var(--tx-oxblood);  --leather-c: #5E1B1B; }
+.leather--espresso { --tx: var(--tx-espresso); --leather-c: #2A1E18; }
+.leather--cognac   { --tx: var(--tx-cognac);   --leather-c: #84492A; }
+.leather--suede    { --tx: var(--tx-suede);    --leather-c: #A8794B; }
+.leather--vegtan   { --tx: var(--tx-vegtan);   --leather-c: #C9A47A; color: var(--c-ink); }
+
+/* Saddle stitching --------------------------------------------------------- */
+/* Frame stitch: dashed fallback; JS swaps in an SVG thread that sews itself. */
+.stitched { position: relative; --stitch-inset: 10px; --stitch-r: 3px; --thread: var(--thread-light); --thread-shadow: rgba(0, 0, 0, .38); }
+.stitched--dark { --thread: var(--thread-dark); --thread-shadow: rgba(58, 26, 18, .14); }
+.stitched--tan { --thread: var(--thread-tan); --thread-shadow: rgba(58, 26, 18, .12); }
+.stitched::before {
+  content: ""; position: absolute; inset: var(--stitch-inset); z-index: 2;
+  border: 1.5px dashed var(--thread); border-radius: var(--stitch-r); pointer-events: none;
+}
+html.js .stitched.has-stitch::before { display: none; }
+.stitch-svg {
+  position: absolute; z-index: 2; pointer-events: none; overflow: visible;
+  top: calc(var(--stitch-inset) - 2px); left: calc(var(--stitch-inset) - 2px);
+  width: calc(100% - 2 * var(--stitch-inset) + 4px); height: calc(100% - 2 * var(--stitch-inset) + 4px);
+}
+.stitch-svg rect { width: calc(100% - 4px); height: calc(100% - 4px); }
+.stitch-svg__thread { fill: none; stroke: var(--thread); stroke-width: 1.7; stroke-linecap: round; stroke-dasharray: 5.5 4.5; }
+.stitch-svg__shadow { fill: none; stroke: var(--thread-shadow); stroke-width: 1.9; stroke-linecap: round; stroke-dasharray: 5.5 4.5; transform: translate(0, .9px); }
+/* Sewing in: a conic mask sweeps once round the frame (registered angle, so it
+   animates; browsers without @property simply show the finished stitch). */
+@property --sew { syntax: "<angle>"; inherits: false; initial-value: 360deg; }
+.stitch-svg {
+  --sew: 360deg;
+  -webkit-mask-image: conic-gradient(from -70deg, #000 var(--sew), transparent 0);
+  mask-image: conic-gradient(from -70deg, #000 var(--sew), transparent 0);
+  transition: --sew 2.2s cubic-bezier(.45, .1, .25, 1);
+}
+.sew-pending > .stitch-svg { --sew: 0deg; }
+
+/* Line stitch (dividers). Sews in left to right when scrolled into view. */
+.stitch-rule { display: block; height: 8px; background: var(--stitch-x-dark) left center / 14px 6px repeat-x; border: 0; margin: 0; }
+.stitch-rule--light { background-image: var(--stitch-x-light); }
+@media (prefers-reduced-motion: no-preference) {
+  html.js .sew:not(.is-sewn), html.js .sew-before:not(.is-sewn)::before, html.js .sew-after:not(.is-sewn)::after { clip-path: inset(0 100% 0 0); }
+  html.js .sew, html.js .sew-before::before, html.js .sew-after::after { transition: clip-path 1.8s cubic-bezier(.45, .1, .25, 1); }
+}
+.section--rule { border-top: 0; position: relative; }
+.section--rule::before {
+  content: ""; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+  width: min(var(--max), calc(100% - 2 * var(--gutter))); height: 8px;
+  background: var(--stitch-x-dark) left center / 14px 6px repeat-x;
+}
+
+/* Blind deboss: three masked layers (light lip, shadow lip, pressed face) */
+.deboss {
+  --h: 56px; --ratio: 1.2308;   /* mark only: 88.9 / 72.23 of logo.svg */
+  --face: rgba(20, 2, 2, .34); --lo: rgba(0, 0, 0, .55); --hi: rgba(255, 228, 205, .2);
+  position: relative; display: inline-block; flex: none;
+  height: var(--h); width: calc(var(--h) * var(--ratio));
+}
+.deboss--word { --ratio: 7.835; }  /* full wordmark */
+.deboss::before, .deboss::after, .deboss > i {
+  content: ""; position: absolute; inset: 0;
+  -webkit-mask: url("/images/logo.svg") 0 0 / auto 100% no-repeat;
+  mask: url("/images/logo.svg") 0 0 / auto 100% no-repeat;
+}
+.deboss::before { background: var(--hi); transform: translateY(1px); }
+.deboss > i { background: var(--lo); transform: translateY(-1px); }
+.deboss::after { background: var(--face); }
+
+/* Pressed label text (debossed into paper) */
+.pressed { color: var(--c-accent); text-shadow: 0 1px 0 rgba(255, 255, 255, .75), 0 -1px 0 rgba(60, 20, 10, .12); }
+
+/* Eyebrow: a sliver of stitched oxblood leather leads every section label */
+.eyebrow::before {
+  width: 26px; height: 9px; opacity: 1; border-radius: 1.5px;
+  background:
+    var(--stitch-x-light) 1px center / 7px 5px repeat-x,
+    radial-gradient(100% 120% at 0 0, rgba(255, 236, 214, .18), transparent 60%),
+    var(--tx-oxblood) center / 120px 120px, #5E1B1B;
+  box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .35), 0 1px 0 rgba(255, 255, 255, .6);
+}
+.cta-band .eyebrow::before, .band--leather .eyebrow::before { box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .35); }
+
+/* Buttons: oxblood leather tab with a stitched inner edge ------------------ */
+.btn { position: relative; isolation: isolate; }
+.btn--primary {
+  --btn-fg: #FFF6EC;
+  background-color: #66201F;
+  background-image:
+    linear-gradient(180deg, rgba(255, 236, 214, .14), rgba(255, 236, 214, 0) 45%, rgba(0, 0, 0, .22)),
+    linear-gradient(rgba(94, 27, 27, .35), rgba(94, 27, 27, .35)),
+    var(--tx-oxblood);
+  background-size: 100% 100%, 100% 100%, 240px 240px;
+  border-color: #4A1414;
+  box-shadow: inset 0 1px 0 rgba(255, 228, 205, .18), 0 1px 0 rgba(255, 255, 255, .5), 0 6px 14px -8px rgba(74, 20, 20, .7);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .35);
+}
+.btn--primary::before {
+  content: ""; position: absolute; inset: 4px; z-index: -1;
+  border: 1px dashed rgba(236, 210, 170, .62); border-radius: 2px; pointer-events: none;
+}
+.btn--primary:hover { --btn-bd: #3E1010; background-color: #5A1A1A; filter: brightness(1.06); }
+.btn--primary:active { transform: translateY(1px); filter: brightness(.96); box-shadow: inset 0 2px 5px rgba(0, 0, 0, .45), 0 1px 0 rgba(255, 255, 255, .5); }
+.btn--sm.btn--primary::before { inset: 3px; }
+
+/* Secondary: debossed outline, pressed into the paper */
+.btn--secondary {
+  --btn-bd: rgba(31, 26, 23, .78);
+  background: rgba(31, 26, 23, .025);
+  box-shadow: inset 0 1px 2px rgba(31, 26, 23, .16), inset 0 -1px 0 rgba(255, 255, 255, .5), 0 1px 0 rgba(255, 255, 255, .85);
+}
+.btn--secondary:hover { --btn-bg: var(--c-ink); --btn-fg: var(--c-paper); background: var(--c-ink); }
+.btn--secondary:active { box-shadow: inset 0 2px 5px rgba(0, 0, 0, .35); }
+
+/* Light button on leather: a stitched paper tab */
+.btn--light {
+  background: #FBF6EE; box-shadow: 0 1px 0 rgba(255, 255, 255, .25) inset, 0 8px 18px -10px rgba(0, 0, 0, .7);
+}
+.btn--light::before { content: ""; position: absolute; inset: 4px; z-index: -1; border: 1px dashed rgba(107, 31, 31, .45); border-radius: 2px; pointer-events: none; }
+.btn--light:hover { background: #FFFFFF; }
+.btn--light:active { box-shadow: inset 0 2px 4px rgba(0, 0, 0, .25); }
+
+/* Top bar: a strip of espresso calf with a stitched lower edge ------------- */
+.topbar {
+  position: relative;
+  border-bottom: 0;
+  color: #E7DAC7;
+  background-color: #2A1E18;
+  background-image: linear-gradient(rgba(36, 26, 21, .78), rgba(36, 26, 21, .78)), var(--tx-espresso);
+  background-size: 100% 100%, var(--tx-size) var(--tx-size);
+}
+.topbar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 3px; height: 6px; background: var(--stitch-x-light) left center / 9px 6px repeat-x; opacity: .55; pointer-events: none; }
+.topbar .container { padding-top: 9px; padding-bottom: 12px; }
+.topbar a { color: #F6EBDC; border-bottom-color: rgba(233, 210, 170, .45); }
+.topbar a:hover { color: #FFFFFF; border-color: currentColor; }
+
+/* Home hero: the photo set into an oxblood leather folio ------------------- */
+.hero__frame.leather {
+  --veil: linear-gradient(160deg, rgba(58, 12, 12, .30), rgba(36, 6, 6, .48));
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 6px;
+  overflow: visible;
+  --frame-top: 76px; --frame-side: 14px;
+  padding: var(--frame-top) var(--frame-side) var(--frame-side);
+  --stitch-inset: 7px; --stitch-r: 4px;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, .35),
+    inset 0 1px 0 rgba(255, 228, 205, .12),
+    0 2px 3px rgba(60, 16, 16, .18),
+    0 34px 60px -32px rgba(60, 16, 16, .65);
+}
+.hero__frame.leather::after { display: none; }
+.hero__crest { position: absolute; top: 16px; left: 22px; display: flex; align-items: center; gap: 14px; }
+.hero__crest .deboss { --h: 44px; }
+.hero__plate {
+  position: relative;
+  aspect-ratio: 4 / 3.6;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--c-photo) var(--tx-paper);
+  background-size: 512px;
+  box-shadow: 0 0 0 1px rgba(30, 6, 6, .55), inset 0 3px 7px -2px rgba(40, 10, 10, .35), inset 0 0 0 1px rgba(255, 255, 255, .5);
+}
+.hero__plate .hero__img { position: absolute; inset: 0; }
+.hero__frame.leather .hero__caption { left: calc(var(--frame-side) + 18px); top: calc(var(--frame-top) + 16px); right: calc(var(--frame-side) + 18px); z-index: 1; }
+/* Sewn-on veg-tan label carrying the style code */
+.hero__label {
+  position: absolute; top: 18px; right: 20px; z-index: 3;
+  display: grid; gap: 3px; justify-items: start;
+  padding: 9px 14px 9px 14px;
+  border-radius: 3px;
+  --veil: linear-gradient(rgba(230, 205, 168, .55), rgba(222, 196, 158, .55));
+  box-shadow: 0 1px 0 rgba(255, 236, 214, .25) inset, 0 2px 4px rgba(0, 0, 0, .4);
+  transform: rotate(-1.5deg);
+  font-family: var(--f-sans); line-height: 1; color: #2A1A12;
+}
+.hero__label::before { content: ""; position: absolute; inset: 3px; border: 1px dashed rgba(92, 40, 22, .55); border-radius: 2px; }
+.hero__label-k { font-size: 9.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #4A2E1E; }
+.hero__label-v { font-family: var(--f-serif); font-size: 1.25rem; font-weight: 600; letter-spacing: .01em; }
+@media (min-width: 900px) {
+  .hero__frame.leather { --frame-top: 96px; --frame-side: 24px; --stitch-inset: 10px; }
+  .hero__crest { top: 20px; left: 26px; }
+  .hero__crest .deboss { --h: 54px; }
+  .hero__plate { aspect-ratio: 4 / 3; }
+  .hero__label { top: 22px; right: 26px; }
+}
+@media (min-width: 1100px) {
+  .hero__plate { aspect-ratio: 4 / 4; }
+}
+
+/* Spec card: stitched paper card */
+.spec-card { background: #FCF8F1 var(--tx-paper); background-size: 512px; }
+.spec-card.stitched { --stitch-inset: 6px; --stitch-r: 2px; z-index: 4; }
+@media (min-width: 1100px) { .spec-card.stitched { position: absolute; } }
+
+/* Leather band (dark espresso section) --------------------------------------- */
+.band--leather {
+  position: relative;
+  --veil: linear-gradient(rgba(36, 26, 21, .62), rgba(36, 26, 21, .7));
+  color: var(--c-on-dark);
+}
+.band--leather::before, .band--leather::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 8px;
+  background: var(--stitch-x-light) left center / 14px 6px repeat-x; opacity: .7;
+}
+.band--leather::before { top: 12px; }
+.band--leather::after { bottom: 12px; }
+.band--leather h2, .band--leather .atelier__quote { color: #F7EDE0; }
+.band--leather .atelier__quote em, .band--leather h2 em { color: #E2B98A; }
+.band--leather .atelier__body { color: #DCCDB9; }
+.band--leather .eyebrow { color: #E2B98A; }
+.band--leather .link-arrow { color: #F2D9B6; }
+.band--leather .link-arrow:hover { color: #FFFFFF; }
+.band--leather .spec-list { border-top-color: rgba(233, 210, 170, .55); }
+.band--leather .spec-list__row { border-bottom-color: rgba(233, 210, 170, .18); }
+.band--leather .spec-list dt { color: #BFAE98; }
+.band--leather .spec-list dd { color: #F3E8DA; }
+.band--leather .deboss { --face: rgba(0, 0, 0, .3); --lo: rgba(0, 0, 0, .6); --hi: rgba(255, 232, 205, .12); }
+
+/* Features: stitched rule instead of a hairline */
+.feature { border-top: 0; position: relative; }
+.feature::before { content: ""; position: absolute; top: -4px; left: 0; right: 0; height: 8px; background: var(--stitch-x-dark) left center / 14px 6px repeat-x; }
+
+/* Material swatch cards: real hide, punched hole with brass eyelet, tag ---- */
+.swatch-card { position: relative; background: #FCF8F1 var(--tx-paper); background-size: 512px; box-shadow: 0 1px 0 rgba(255, 255, 255, .7), 0 14px 26px -22px rgba(40, 20, 10, .5); }
+.swatch-card__swatch { aspect-ratio: 16 / 10; overflow: hidden; }
+.swatch-card__swatch::after { inset: 8px; border: 0; border-radius: 3px; background:
+  var(--stitch-x-light) left top / 14px 6px repeat-x, var(--stitch-x-light) left bottom / 14px 6px repeat-x; opacity: .85; }
+.swatch-card__swatch::before {
+  content: ""; position: absolute; z-index: 1; top: 20px; left: 18px; width: 18px; height: 18px; border-radius: 50%;
+  background: radial-gradient(circle, #FCF8F1 0 4.6px, #4A2E10 5.2px, #E2C27A 6.2px, #A97F36 7.6px, rgba(0, 0, 0, .45) 8.4px, transparent 9px);
+}
+.swatch-card__tag {
+  position: absolute; z-index: 1; right: 14px; bottom: 16px;
+  padding: 5px 9px 5px 15px;
+  background: #F4EADA; color: #2A1A12;
+  font: 600 10.5px/1 var(--f-sans); letter-spacing: .14em; text-transform: uppercase;
+  clip-path: polygon(7px 0, 100% 0, 100% 100%, 7px 100%, 0 50%);
+  -webkit-mask: radial-gradient(circle at 7.5px 50%, transparent 2px, #000 2.5px);
+  mask: radial-gradient(circle at 7.5px 50%, transparent 2px, #000 2.5px);
+  transform: rotate(-3deg);
+}
+.swatch--lamb, .swatch--cow, .swatch--suede, .swatch--oxblood { background-size: 100% 100%, 100% 100%, var(--tx-size) var(--tx-size); background-repeat: no-repeat, no-repeat, repeat; }
+.swatch--lamb {
+  background-color: #7E4A2A;
+  background-image: radial-gradient(120% 90% at 20% 0%, rgba(255, 240, 220, .16), transparent 55%), radial-gradient(120% 110% at 100% 100%, rgba(0, 0, 0, .25), transparent 60%), var(--tx-cognac);
+}
+.swatch--cow {
+  background-color: #5E1B1B;
+  background-image: radial-gradient(120% 90% at 20% 0%, rgba(255, 236, 214, .14), transparent 55%), radial-gradient(120% 110% at 100% 100%, rgba(0, 0, 0, .3), transparent 60%), var(--tx-oxblood);
+}
+.swatch--suede {
+  background-color: #A8794B;
+  background-image: radial-gradient(120% 90% at 20% 0%, rgba(255, 240, 220, .14), transparent 55%), radial-gradient(120% 110% at 100% 100%, rgba(0, 0, 0, .22), transparent 60%), var(--tx-suede);
+}
+.swatch--oxblood {
+  background-color: #5E1B1B;
+  background-image: radial-gradient(120% 90% at 20% 0%, rgba(255, 236, 214, .14), transparent 55%), radial-gradient(120% 110% at 100% 100%, rgba(0, 0, 0, .3), transparent 60%), var(--tx-oxblood);
+}
+.swatch--twill {
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(255, 250, 230, .14), transparent 55%),
+    radial-gradient(120% 110% at 100% 100%, rgba(0, 0, 0, .25), transparent 60%),
+    repeating-linear-gradient(-58deg, rgba(255, 255, 240, .10) 0 1.4px, rgba(0, 0, 0, .10) 1.4px 2.6px, transparent 2.6px 4px),
+    repeating-linear-gradient(32deg, rgba(0, 0, 0, .05) 0 .8px, transparent .8px 2.2px),
+    linear-gradient(160deg, #6F6A4C, #4F4B33);
+}
+@media (max-width: 599.98px) {
+  .hero__frame.leather .hero__caption { font-size: 10px; letter-spacing: .1em; }
+  .swatch-card__swatch { aspect-ratio: 16 / 9; }
+  .swatch-card__swatch::before { top: 14px; left: 12px; transform: scale(.85); }
+  .swatch-card__tag { right: 8px; bottom: 12px; font-size: 9.5px; padding: 4px 7px 4px 13px; }
+}
+
+/* Spec table / terms on a stitched card */
+.stitched-card { background: #FCF8F1 var(--tx-paper); background-size: 512px; border: var(--border-strong); border-radius: var(--r-3); padding: var(--s-5) var(--s-5) var(--s-4); box-shadow: 0 1px 0 rgba(255, 255, 255, .8), 0 18px 34px -28px rgba(40, 20, 10, .55); }
+.stitched-card.stitched { --stitch-inset: 7px; --stitch-r: 4px; }
+@media (min-width: 900px) { .stitched-card { padding: var(--s-6) var(--s-6) var(--s-5); } }
+.stitched-card > .spec-table { border-top-color: var(--c-line-2); }
+.stitched-card > .spec-table tr:last-child th, .stitched-card > .spec-table tr:last-child td { border-bottom: 0; }
+
+/* Product cards: hang-tag style code on a looped cord --------------------- */
+.product-card__media { background: var(--c-photo) var(--tx-paper); background-size: 512px; }
+.product-card__media::before, .product-card__media::after {
+  content: ""; position: absolute; z-index: 2; top: -2px; left: 42px; width: 1.4px; height: 27px;
+  background: linear-gradient(#5B3E28, #8A6646); border-radius: 1px; transform-origin: bottom center;
+}
+.product-card__media::before { transform: rotate(16deg); }
+.product-card__media::after { transform: rotate(-16deg); }
+.product-card__code {
+  top: 20px; left: 14px; z-index: 1;
+  display: grid; place-items: center;
+  min-width: 58px; padding: 18px 9px 8px;
+  border: 0; border-radius: 0 0 3px 3px;
+  background:
+    radial-gradient(circle at 50% 9px, transparent 3px, #B48C62 3.4px, #8A6646 4.6px, transparent 5.2px),
+    linear-gradient(180deg, #F6EDDD, #EADCC4);
+  color: #2A1A12;
+  font: 600 11px/1 var(--f-sans); letter-spacing: .1em;
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%, 0 8px);
+  -webkit-mask: radial-gradient(circle at 50% 9px, transparent 3px, #000 3.4px);
+  mask: radial-gradient(circle at 50% 9px, transparent 3px, #000 3.4px);
+  transform: rotate(-4deg); transform-origin: 50% 9px;
+  transition: transform .5s cubic-bezier(.3, 1.6, .5, 1);
+}
+.product-card:hover .product-card__code { transform: rotate(3deg); }
+@media (max-width: 599.98px) {
+  .product-card__code { left: 8px; top: 16px; min-width: 50px; padding: 17px 6px 7px; font-size: 10px; }
+  .product-card__media::before, .product-card__media::after { left: 33px; height: 23px; }
+}
+
+/* Spec tile: stitched paper */
+.spec-tile { border: 1px solid var(--c-line-2); position: relative; background: linear-gradient(rgba(239, 231, 218, .86), rgba(239, 231, 218, .86)), var(--tx-paper) 0 0 / 512px, var(--c-paper-2); }
+.spec-tile::before { content: ""; position: absolute; inset: 6px; border: 1.5px dashed rgba(124, 43, 36, .5); border-radius: 2px; pointer-events: none; }
+.spec-tile:hover { border-style: solid; }
+
+/* Timeline: oxblood leather rivets, stitched connectors */
+.timeline__step::before {
+  border: 0; color: #FBEFE2;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 236, 214, .25), transparent 55%),
+    radial-gradient(circle, rgba(94, 27, 27, .35) 0 50%, transparent 72%),
+    var(--tx-oxblood) center / 140px 140px, #5E1B1B;
+  outline: 1px dashed rgba(236, 210, 170, .7); outline-offset: -5px;
+  box-shadow: 0 0 0 3px var(--c-paper), 0 2px 4px rgba(60, 16, 16, .35);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .4);
+}
+.section--tint .timeline__step::before { background-color: #5E1B1B; box-shadow: 0 0 0 3px var(--c-paper-2), 0 2px 4px rgba(60, 16, 16, .35); }
+.timeline__step::after { border-left: 0; width: 8px; left: 14px; background: var(--stitch-y-dark) center top / 8px 11px repeat-y; opacity: .75; }
+@media (min-width: 900px) {
+  .timeline--h .timeline__step::after { border-top: 0; height: 8px; width: auto; top: 14px; background: var(--stitch-x-dark) left center / 14px 6px repeat-x; }
+}
+
+/* Active chip: oxblood leather */
+.chip[aria-pressed="true"], .chip.is-active {
+  border-color: #4A1414;
+  background: linear-gradient(rgba(94, 27, 27, .4), rgba(94, 27, 27, .4)), var(--tx-oxblood) center / 200px 200px, #5E1B1B;
+  color: #FFF6EC;
+}
+
+/* CTA band: oxblood leather, stitched, hallmark pressed in ---------------- */
+.cta-band__inner.leather { --veil: linear-gradient(100deg, rgba(52, 10, 10, .55), rgba(52, 10, 10, .3)); border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .35), 0 30px 60px -36px rgba(60, 16, 16, .7); }
+.cta-band__inner.leather::before { inset: 12px; }
+.cta-band__inner.stitched { --stitch-inset: 12px; --stitch-r: 4px; }
+.cta-band__inner > :not(.stitch-svg):not(.cta-band__deboss) { position: relative; z-index: 3; }
+.cta-band__inner > .cta-band__deboss { position: absolute; z-index: 1; --h: 132px; right: 48px; top: 50%; margin-top: -66px; }
+@media (max-width: 899.98px) { .cta-band__inner > .cta-band__deboss { --h: 64px; right: 28px; top: 28px; margin-top: 0; } .cta-band__inner.leather .cta-band__title { padding-right: 72px; } }
+@media (min-width: 900px) { .cta-band__inner.leather { padding-right: calc(var(--s-8) + 190px); } }
+
+/* Inner-page hero: a hide offcut with the Hallmark pressed in -------------- */
+.page-hero { position: relative; border-bottom: 0; }
+.page-hero > .container { position: relative; }
+.page-hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
+  background: var(--stitch-x-dark) left center / 14px 6px repeat-x; opacity: .7;
+}
+.offcut { display: none; }
+@media (min-width: 1100px) {
+  .page-hero h1, .page-hero .lede { max-width: min(14em, calc(100% - 330px)); }
+  .page-hero .lede { max-width: min(36em, calc(100% - 330px)); }
+  .offcut {
+    display: grid; place-items: center;
+    position: absolute; right: calc(var(--gutter) + 8px); top: -6px;
+    width: 236px; height: 250px;
+    border-radius: 46% 12px 38% 18px / 20px 30% 14px 40%;
+    transform: rotate(4deg);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 236, 214, .15), 0 26px 50px -30px rgba(40, 14, 10, .7);
+  }
+  .offcut .deboss { --h: 84px; }
+  .offcut::after { content: ""; position: absolute; inset: 12px; border: 1.5px dashed var(--thread-light); border-radius: inherit; opacity: .55; }
+  .leather--vegtan.offcut .deboss { --face: rgba(70, 35, 10, .22); --lo: rgba(60, 28, 8, .45); --hi: rgba(255, 245, 225, .55); }
+  .leather--vegtan.offcut::after { border-color: rgba(124, 43, 36, .55); }
+}
+
+/* Process tier bars: leather straps in a pressed groove */
+.tier-bar { background: var(--c-paper-3); box-shadow: inset 0 1px 2px rgba(31, 26, 23, .25), 0 1px 0 rgba(255, 255, 255, .7); height: 10px; }
+.tier-bar span { background: linear-gradient(rgba(255, 236, 214, .15), rgba(0, 0, 0, .15)), var(--tx-oxblood) center / 160px 160px, #5E1B1B; box-shadow: 0 1px 1px rgba(0, 0, 0, .3); }
+.tier-bar--low span { background: linear-gradient(rgba(255, 236, 214, .15), rgba(0, 0, 0, .15)), var(--tx-cognac) center / 160px 160px, #84492A; }
+
+/* Callout: leather edge binding instead of a flat bar */
+.callout { position: relative; border-left: 1px solid var(--c-line-2); padding-left: calc(var(--s-5) + 8px); background: #FCF8F1 var(--tx-paper); background-size: 512px; overflow: hidden; }
+.callout::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 8px; background: linear-gradient(90deg, rgba(0, 0, 0, .15), transparent 60%), var(--tx-oxblood) center / 160px 160px, #5E1B1B; }
+
+/* Atelier panel (capabilities): espresso leather, 30+ pressed in */
+.atelier-panel.leather { border: 0; background-color: #2A1E18; --veil: linear-gradient(rgba(36, 26, 21, .5), rgba(36, 26, 21, .6)); color: var(--c-on-dark); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .4), 0 30px 60px -36px rgba(30, 16, 10, .8); }
+.atelier-panel.leather::before { border: 1.5px dashed rgba(233, 210, 170, .5); inset: 10px; border-radius: 3px; }
+.atelier-panel.leather .label { color: #D9C6AC; }
+/* 30+ hot-foiled in brass, the way a maker's mark is stamped */
+.atelier-panel.leather .atelier-panel__num {
+  color: #D9B676;
+  background: linear-gradient(175deg, #F6E2B0 0%, #D7B06A 38%, #A57B36 62%, #E3C27E 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, .7)) drop-shadow(0 1px 0 rgba(255, 232, 205, .12));
+}
+.atelier-panel.leather .atelier-panel__cap { color: #EBDDCB; }
+.atelier-panel.leather .atelier-panel__foot { border-top-color: rgba(233, 210, 170, .25); }
+
+/* Form panel: stitched paper */
+.form-panel.stitched { --stitch-inset: 8px; --stitch-r: 4px; background: #FCF8F1 var(--tx-paper); background-size: 512px; box-shadow: 0 1px 0 rgba(255, 255, 255, .8), 0 24px 44px -34px rgba(40, 20, 10, .55); }
+
+/* Footer: espresso calf, stitched top edge, debossed wordmark -------------- */
+.site-footer.leather {
+  --veil: linear-gradient(rgba(36, 26, 21, .72), rgba(30, 21, 17, .8));
+  --tx-size: 360px;
+  position: relative;
+  color: var(--c-on-dark-muted);
+  box-shadow: inset 0 1px 0 rgba(255, 232, 205, .08), inset 0 10px 18px -12px rgba(0, 0, 0, .7);
+}
+.site-footer.leather::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 14px; height: 8px;
+  background: var(--stitch-x-light) left center / 14px 6px repeat-x; opacity: .75;
+}
+.site-footer__mark { display: inline-block; padding: 6px 0; text-decoration: none; }
+.site-footer__mark .deboss { --h: 44px; --face: rgba(233, 214, 186, .62); --lo: rgba(0, 0, 0, .75); --hi: rgba(255, 236, 214, .1); }
+.site-footer__mark:hover .deboss { --face: rgba(246, 232, 210, .85); }
+@media (max-width: 420px) { .site-footer__mark .deboss { --h: 36px; } }
+
+/* Category tiles: photo on grained paper, a stitch appears on hover */
+.tile { position: relative; }
+.tile__media { background: var(--c-photo) var(--tx-paper); background-size: 512px; }
+.tile::after { content: ""; position: absolute; inset: 6px; border: 1.5px dashed rgba(124, 43, 36, .5); border-radius: 2px; opacity: 0; transition: opacity .25s var(--ease); pointer-events: none; }
+.tile:hover::after, .tile:focus-visible::after { opacity: 1; }
