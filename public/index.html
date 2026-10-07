@@ -34,8 +34,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Inter:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap">
 
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="stylesheet" href="/assets/site.css?v=7">
-  <script src="/assets/site.js?v=3" defer></script>
+  <link rel="preload" as="image" href="/images/v2/home/hero-hide-2000.webp" media="(min-width: 700px)" type="image/webp">
+  <link rel="stylesheet" href="/assets/site.css?v=9">
+  <link rel="stylesheet" href="/assets/home.css?v=1">
+  <script src="/assets/site.js?v=4" defer></script>
+  <script src="/assets/home.js?v=1" defer></script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Organization","name":"Leather Genius","url":"https://leathergenius.site/","sameAs":["https://www.linkedin.com/company/leather-genius/","https://www.instagram.com/leather_genius/"],"logo":"https://leathergenius.site/apple-touch-icon.png?v=2","email":"queries@leathergenius.site","description":"Private-label manufacturer of leather jackets, bags and twill outerwear in Sialkot, Pakistan.","address":{"@type":"PostalAddress","addressLocality":"Sialkot","addressCountry":"PK"}}
   </script>
@@ -69,57 +72,55 @@
   </div>
 </header>
 
-<main id="main">
+<main id="main" class="home">
 
-  <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="container">
-      <div class="hero__grid">
-        <div class="hero__copy">
-          <p class="eyebrow">Private-label manufacturer · Sialkot, Pakistan</p>
-          <h1 id="hero-title">Your leather jackets and bags, <em>made in Sialkot</em> under your label.</h1>
-          <p class="lede">Send us a style you already sell, or describe one. We build the first piece free and courier it to you by FedEx. You judge the hide in hand before you pay anything.</p>
-          <div class="hero__actions">
-            <a class="btn btn--primary btn--lg" href="/sample/">Request a free sample <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="btn btn--secondary btn--lg" href="/catalogue/">View the catalogue</a>
-          </div>
-          <p class="hero__note">
-            <span>Replies within 24 hours, weekdays</span>
-            <a href="mailto:queries@leathergenius.site">queries@leathergenius.site</a>
-          </p>
+  <!-- HERO: the hide itself -->
+  <section class="lg-hero" aria-labelledby="hero-title">
+    <span class="lg-hero__light" aria-hidden="true"></span>
+    <div class="container lg-hero__grid">
+      <div class="lg-hero__plate">
+        <p class="lg-hero__eyebrow">Private-label manufacturer · Sialkot, Pakistan</p>
+        <h1 id="hero-title" class="lg-hero__title">Your leather jackets and bags, <em class="foil">made in Sialkot</em> under your label.</h1>
+        <p class="lg-hero__lede">Send us a style you already sell, or describe one. We build the first piece free and courier it to you by FedEx. You judge the hide in hand before you pay anything.</p>
+        <div class="lg-hero__actions">
+          <a class="pulltab" href="/sample/">
+            <span class="pulltab__ring" aria-hidden="true"></span>
+            <span class="pulltab__strap"><span class="pulltab__text">Request a free sample</span></span>
+          </a>
+          <a class="lg-hero__link" href="/catalogue/">View the catalogue <span aria-hidden="true">→</span></a>
         </div>
-
-        <div class="hero__media">
-          <figure class="hero__frame leather leather--oxblood stitched">
-            <span class="hero__crest" aria-hidden="true"><span class="deboss"><i></i></span></span>
-            <span class="hero__label leather leather--vegtan" aria-hidden="true"><span class="hero__label-k">Style</span><span class="hero__label-v">LG-201</span></span>
-            <div class="hero__plate">
-              <img class="hero__img" src="/images/hero-a2-bomber.jpg" alt="Vintage brown lambskin A2 bomber jacket with rib hem and cuffs" width="474" height="470" fetchpriority="high">
-            </div>
-            <figcaption class="hero__caption">Lambskin A2 bomber · from the catalogue</figcaption>
-          </figure>
-          <aside class="spec-card stitched stitched--tan" aria-label="What you lock at the sample stage">
-            <div class="spec-card__title"><strong>Your spec, locked</strong><span class="label">Sample stage</span></div>
-            <div class="spec-card__row"><span class="spec-card__k">Hide</span><span class="spec-card__v">Named leather, weight and finish</span></div>
-            <div class="spec-card__row"><span class="spec-card__k">Lining</span><span class="spec-card__v">Bemberg or quilted</span></div>
-            <div class="spec-card__row"><span class="spec-card__k">Hardware</span><span class="spec-card__v">YKK or RIRI, brass or antique nickel</span></div>
-            <div class="spec-card__row"><span class="spec-card__k">Label</span><span class="spec-card__v">Yours: debossed, foiled, etched or woven</span></div>
-          </aside>
-        </div>
+        <p class="lg-hero__note"><span>Replies within 24 hours, weekdays</span> <a href="mailto:queries@leathergenius.site">queries@leathergenius.site</a></p>
       </div>
 
-      <dl class="stats hero__stats">
-        <div class="stat"><dt class="stat__label">Sample fee, FedEx courier included</dt><dd class="stat__value">$0</dd></div>
-        <div class="stat"><dt class="stat__label">Days, sample turnaround</dt><dd class="stat__value">7–10</dd></div>
-        <div class="stat"><dt class="stat__label">Units per style, minimum order</dt><dd class="stat__value">50–100</dd></div>
-        <div class="stat"><dt class="stat__label">Weeks, production lead time</dt><dd class="stat__value">4–6</dd></div>
-        <div class="stat"><dt class="stat__label">Below US domestic make, from 250 units</dt><dd class="stat__value">30–40%</dd></div>
-      </dl>
+      <figure class="lg-hero__object">
+        <span class="lg-hero__pool" aria-hidden="true"></span>
+        <picture>
+          <source srcset="/images/v2/home/a2-cutout.webp" type="image/webp">
+          <img class="lg-hero__jacket" src="/images/hero-a2-bomber.jpg" alt="Vintage brown lambskin A2 bomber jacket with rib hem and cuffs" width="474" height="470" fetchpriority="high">
+        </picture>
+        <span class="hangtag" aria-hidden="true">
+          <span class="hangtag__cord"></span>
+          <span class="hangtag__body"><span class="hangtag__k">Style</span><span class="hangtag__v">LG-201</span><span class="hangtag__k">Lambskin</span></span>
+        </span>
+        <figcaption class="lg-hero__caption">Lambskin A2 bomber, from the catalogue</figcaption>
+      </figure>
+    </div>
+
+    <div class="lg-hero__edge">
+      <div class="container">
+        <dl class="foilstats">
+          <div class="foilstats__item"><dt class="foilstats__k">Sample fee, FedEx courier included</dt><dd class="foilstats__v">$0</dd></div>
+          <div class="foilstats__item"><dt class="foilstats__k">Days, sample turnaround</dt><dd class="foilstats__v">7–10</dd></div>
+          <div class="foilstats__item"><dt class="foilstats__k">Units per style, minimum order</dt><dd class="foilstats__v">50–100</dd></div>
+          <div class="foilstats__item"><dt class="foilstats__k">Weeks, production lead time</dt><dd class="foilstats__v">4–6</dd></div>
+          <div class="foilstats__item"><dt class="foilstats__k">Below US domestic make, from 250 units</dt><dd class="foilstats__v">30–40%</dd></div>
+        </dl>
+      </div>
     </div>
   </section>
 
   <!-- WHAT WE MAKE -->
-  <section class="section section--tint" aria-labelledby="make-title">
+  <section class="section section--tint home-make" aria-labelledby="make-title">
     <div class="container">
       <div class="section-head section-head--split">
         <div>
@@ -161,7 +162,7 @@
   </section>
 
   <!-- WHY US -->
-  <section class="section" aria-labelledby="why-title">
+  <section class="section home-why" aria-labelledby="why-title">
     <div class="container">
       <div class="section-head section-head--split">
         <div>
@@ -197,7 +198,8 @@
   </section>
 
   <!-- ATELIER -->
-  <section class="section band--leather leather leather--espresso" aria-labelledby="atelier-title">
+  <section class="section band--leather leather leather--espresso home-atelier" aria-labelledby="atelier-title">
+    <span class="home-atelier__num" aria-hidden="true">30+</span>
     <div class="container">
       <div class="atelier">
         <div>
@@ -221,98 +223,199 @@
     </div>
   </section>
 
-  <!-- MATERIALS -->
-  <section class="section section--tint" aria-labelledby="materials-title">
+  <!-- MATERIALS: swatch book + spec builder -->
+  <section class="section section--tint swatchbook-section" id="spec" aria-labelledby="materials-title">
     <div class="container">
       <div class="section-head section-head--split">
         <div>
-          <p class="eyebrow">Materials</p>
+          <p class="eyebrow">Materials · Swatch book</p>
           <h2 id="materials-title">We buy the hide ourselves, and lock it to your style.</h2>
         </div>
-        <p class="section-head__intro">Every style is tied to a named leather, weight and finish, so unit 5,000 matches the sample you approved.</p>
+        <p class="section-head__intro">Every style is tied to a named leather, weight and finish, so unit 5,000 matches the sample you approved. Pick a hide and your trims below, and we will start your sample from that spec.</p>
       </div>
 
-      <div class="grid grid--4">
-        <article class="swatch-card">
-          <div class="swatch-card__swatch swatch--lamb" role="presentation"><span class="swatch-card__tag" aria-hidden="true">No. 01</span></div>
-          <div class="swatch-card__body">
-            <span class="swatch-card__weight">0.7–0.9 mm</span>
-            <h3 class="swatch-card__name">Lambskin</h3>
-            <p class="swatch-card__use">Bombers, blazers, shirt-jackets.</p>
+      <form class="specbook" id="specbook" action="/sample/" method="get" data-hide="lambskin">
+        <fieldset class="fan">
+          <legend class="specbook__legend">1. Hide</legend>
+          <div class="fan__deck">
+            <label class="fan__swatch fan__swatch--lambskin">
+              <input class="visually-hidden" type="radio" name="hide" value="lambskin" checked>
+              <span class="fan__face"><span class="fan__no">No. 01</span><span class="fan__name">Lambskin</span><span class="fan__wt">0.7–0.9 mm</span></span>
+            </label>
+            <label class="fan__swatch fan__swatch--cowhide">
+              <input class="visually-hidden" type="radio" name="hide" value="cowhide">
+              <span class="fan__face"><span class="fan__no">No. 02</span><span class="fan__name">Cowhide &amp; steer</span><span class="fan__wt">1.1–1.4 mm</span></span>
+            </label>
+            <label class="fan__swatch fan__swatch--goat-suede">
+              <input class="visually-hidden" type="radio" name="hide" value="goat-suede">
+              <span class="fan__face"><span class="fan__no">No. 03</span><span class="fan__name">Goat &amp; suede</span><span class="fan__wt">Pebble &amp; nap</span></span>
+            </label>
+            <label class="fan__swatch fan__swatch--twill">
+              <input class="visually-hidden" type="radio" name="hide" value="twill">
+              <span class="fan__face"><span class="fan__no">No. 04</span><span class="fan__name">Twill &amp; canvas</span><span class="fan__wt">10–14 oz</span></span>
+            </label>
+            <span class="fan__screw" aria-hidden="true"></span>
           </div>
-        </article>
-        <article class="swatch-card">
-          <div class="swatch-card__swatch swatch--cow" role="presentation"><span class="swatch-card__tag" aria-hidden="true">No. 02</span></div>
-          <div class="swatch-card__body">
-            <span class="swatch-card__weight">1.1–1.4 mm</span>
-            <h3 class="swatch-card__name">Cowhide &amp; steer</h3>
-            <p class="swatch-card__use">Biker jackets, structured bags, belts.</p>
-          </div>
-        </article>
-        <article class="swatch-card">
-          <div class="swatch-card__swatch swatch--suede" role="presentation"><span class="swatch-card__tag" aria-hidden="true">No. 03</span></div>
-          <div class="swatch-card__body">
-            <span class="swatch-card__weight">Pebble &amp; nap</span>
-            <h3 class="swatch-card__name">Goat &amp; suede</h3>
-            <p class="swatch-card__use">Truckers, overshirts, lined totes.</p>
-          </div>
-        </article>
-        <article class="swatch-card">
-          <div class="swatch-card__swatch swatch--twill" role="presentation"><span class="swatch-card__tag" aria-hidden="true">No. 04</span></div>
-          <div class="swatch-card__body">
-            <span class="swatch-card__weight">10–14 oz</span>
-            <h3 class="swatch-card__name">Twill &amp; canvas</h3>
-            <p class="swatch-card__use">Chore coats, field jackets, leather-trim bags.</p>
-          </div>
-        </article>
-      </div>
+          <p class="fan__hint">Tap a swatch to see it in the panel.</p>
+        </fieldset>
 
-      <div class="callout mt-6">
-        <strong>Trims to match.</strong> Bemberg and quilted linings. YKK and RIRI hardware in solid brass or antique nickel. Debossed and hot-foil labels, woven care and size tags.
-      </div>
-      <p class="mt-6"><a class="link-arrow" href="/capabilities/#materials">All materials and branding options <span class="arrow" aria-hidden="true">→</span></a></p>
+        <div class="specbook__panel">
+          <div class="hidecard" aria-live="polite">
+            <div class="hidecard__info" data-for="lambskin">
+              <span class="hidecard__no">No. 01 · 0.7–0.9 mm</span>
+              <p class="hidecard__name">Lambskin</p>
+              <p class="hidecard__use">Soft and light. For bombers, blazers and shirt-jackets.</p>
+            </div>
+            <div class="hidecard__info" data-for="cowhide">
+              <span class="hidecard__no">No. 02 · 1.1–1.4 mm</span>
+              <p class="hidecard__name">Cowhide &amp; steer</p>
+              <p class="hidecard__use">Heavier and structured. For biker jackets, structured bags and belts.</p>
+            </div>
+            <div class="hidecard__info" data-for="goat-suede">
+              <span class="hidecard__no">No. 03 · Pebble &amp; nap</span>
+              <p class="hidecard__name">Goat &amp; suede</p>
+              <p class="hidecard__use">For truckers, overshirts and lined totes.</p>
+            </div>
+            <div class="hidecard__info" data-for="twill">
+              <span class="hidecard__no">No. 04 · 10–14 oz</span>
+              <p class="hidecard__name">Twill &amp; canvas</p>
+              <p class="hidecard__use">For chore coats, field jackets and leather-trim bags.</p>
+            </div>
+            <span class="hidecard__rivet hidecard__rivet--a" aria-hidden="true"></span>
+            <span class="hidecard__rivet hidecard__rivet--b" aria-hidden="true"></span>
+          </div>
+
+          <div class="specbook__sheet">
+          <div class="trims">
+            <fieldset class="trims__group">
+              <legend class="specbook__legend">2. Lining</legend>
+              <div class="trims__opts">
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="lining" value="bemberg" checked><span class="trim-opt__chip trim-opt__chip--bemberg" aria-hidden="true"></span><span class="trim-opt__txt">Bemberg</span></label>
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="lining" value="quilted"><span class="trim-opt__chip trim-opt__chip--quilted" aria-hidden="true"></span><span class="trim-opt__txt">Quilted</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="trims__group">
+              <legend class="specbook__legend">3. Hardware</legend>
+              <div class="trims__opts">
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="hardware" value="ykk-brass" checked><span class="trim-opt__chip trim-opt__chip--brass" aria-hidden="true"></span><span class="trim-opt__txt">YKK, solid brass</span></label>
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="hardware" value="ykk-nickel"><span class="trim-opt__chip trim-opt__chip--nickel" aria-hidden="true"></span><span class="trim-opt__txt">YKK, antique nickel</span></label>
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="hardware" value="riri-brass"><span class="trim-opt__chip trim-opt__chip--brass" aria-hidden="true"></span><span class="trim-opt__txt">RIRI, solid brass</span></label>
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="hardware" value="riri-nickel"><span class="trim-opt__chip trim-opt__chip--nickel" aria-hidden="true"></span><span class="trim-opt__txt">RIRI, antique nickel</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="trims__group">
+              <legend class="specbook__legend">4. Your label</legend>
+              <div class="trims__opts">
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="label" value="debossed" checked><span class="trim-opt__chip trim-opt__chip--deboss" aria-hidden="true"></span><span class="trim-opt__txt">Debossed</span></label>
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="label" value="hot-foil"><span class="trim-opt__chip trim-opt__chip--foil" aria-hidden="true"></span><span class="trim-opt__txt">Hot-foiled</span></label>
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="label" value="laser-etched"><span class="trim-opt__chip trim-opt__chip--laser" aria-hidden="true"></span><span class="trim-opt__txt">Laser-etched</span></label>
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="label" value="stitched"><span class="trim-opt__chip trim-opt__chip--stitch" aria-hidden="true"></span><span class="trim-opt__txt">Stitched</span></label>
+                <label class="trim-opt"><input class="visually-hidden" type="radio" name="label" value="woven"><span class="trim-opt__chip trim-opt__chip--woven" aria-hidden="true"></span><span class="trim-opt__txt">Woven neck label</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="specbook__foot">
+            <p class="specbook__summary" id="spec-summary" aria-live="polite"><span class="label">Your spec</span> <span data-sum>Lambskin · Bemberg · YKK, solid brass · Debossed</span></p>
+            <button class="pulltab pulltab--sm" type="submit">
+              <span class="pulltab__ring" aria-hidden="true"></span>
+              <span class="pulltab__strap"><span class="pulltab__text">Sample this spec, free</span></span>
+            </button>
+          </div>
+          <p class="specbook__fine">Branding adds 5 to 10 days and a small per-unit cost. Veg-tan and chrome-tan lines, full hand-stitching available. <a href="/capabilities/#materials">All materials and branding options</a></p>
+          </div>
+        </div>
+      </form>
     </div>
   </section>
 
-  <!-- PROCESS -->
-  <section class="section" aria-labelledby="process-title">
+  <!-- PROCESS: on the pattern table -->
+  <section class="section patternsheet" aria-labelledby="process-title">
     <div class="container">
-      <div class="section-head section-head--split">
+      <div class="section-head section-head--split patternsheet__head">
         <div>
           <p class="eyebrow">How it works</p>
           <h2 id="process-title">From first message to your dock in four steps.</h2>
         </div>
-        <p class="section-head__intro">You pay nothing until you approve the sample. After that, 50% deposit and 50% on shipment.</p>
+        <p class="section-head__intro">We cut to your spec, not ours. You pay nothing until you approve the sample. After that, 50% deposit and 50% on shipment.</p>
       </div>
 
-      <ol class="timeline timeline--h">
-        <li class="timeline__step">
-          <span class="timeline__when">Day 1–3</span>
-          <h3 class="timeline__title">Spec the sample</h3>
-          <p class="timeline__text">Mail us a piece or describe it. We lock hide, weight, lining, hardware, stitch and finish.</p>
-        </li>
-        <li class="timeline__step">
-          <span class="timeline__when">Day 4–14</span>
-          <h3 class="timeline__title">Sample shipped</h3>
-          <p class="timeline__text">Built in Sialkot and sent free by FedEx. You judge the hide in hand.</p>
-        </li>
-        <li class="timeline__step">
-          <span class="timeline__when">Day 15–21</span>
-          <h3 class="timeline__title">Quote &amp; PO</h3>
-          <p class="timeline__text">Approve the sample and we quote the run at your volume, tiered from 50 units.</p>
-        </li>
-        <li class="timeline__step">
-          <span class="timeline__when">4–6 weeks</span>
-          <h3 class="timeline__title">Delivered</h3>
-          <p class="timeline__text">Production, then air or sea freight by urgency. Customs handled, landed at your dock or warehouse.</p>
-        </li>
-      </ol>
+      <div class="zipsteps" style="--zip: 1">
+        <div class="zip" aria-hidden="true">
+          <span class="zip__tape"></span>
+          <span class="zip__teeth"></span>
+          <span class="zip__teeth zip__teeth--closed"></span>
+          <span class="zip__stop zip__stop--end"></span>
+          <svg class="zip__pull" viewBox="0 0 44 74" width="44" height="74"><defs><linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3DA9A"/><stop offset=".45" stop-color="#C79A45"/><stop offset=".7" stop-color="#8E6526"/><stop offset="1" stop-color="#D9B567"/></linearGradient></defs><path d="M6 4h32a4 4 0 0 1 4 4v10c0 6-6 10-10 12H12C8 28 2 24 2 18V8a4 4 0 0 1 4-4z" fill="url(#brass)" stroke="#6E4C1B" stroke-width="1.2"/><path d="M14 26h16l2 8H12z" fill="#A57B33" stroke="#6E4C1B" stroke-width="1"/><path d="M12 32h20a3 3 0 0 1 3 3v28a9 9 0 0 1-9 9h-8a9 9 0 0 1-9-9V35a3 3 0 0 1 3-3z" fill="url(#brass)" stroke="#6E4C1B" stroke-width="1.2"/><rect x="17" y="40" width="10" height="22" rx="5" fill="#3A2412" opacity=".85"/><path d="M8 8h28" stroke="#FFF2CC" stroke-opacity=".7" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+
+        <ol class="pieces">
+          <li class="piece" style="--at: .125">
+            <svg class="piece__svg" viewBox="0 0 200 170" aria-hidden="true">
+              <path class="cut" d="M50 40 Q60 30 66 14 L112 22 Q116 46 134 58 L140 152 L50 152 Z"/>
+              <path class="seam" d="M58 44 Q66 34 71 22 L106 28 Q110 49 126 61 L131 144 L58 144 Z"/>
+              <path class="notch" d="M89 18 l1 7 M137 104 l-7 0 M95 152 l0 -7"/>
+              <path class="grain" d="M92 52 V130 M88 58 l4 -6 4 6 M88 124 l4 6 4 -6"/>
+              <text class="chalk" x="100" y="96" transform="rotate(-90 100 96)">FRONT · CUT 2</text>
+              <text class="marker" x="146" y="34">hide · lining</text>
+              <text class="marker" x="146" y="46">hardware · label</text>
+            </svg>
+            <span class="piece__num">1</span>
+            <span class="piece__when">Day 1–3</span>
+            <h3 class="piece__title">Spec the sample</h3>
+            <p class="piece__text">Mail us a piece or describe it. We lock hide, weight, lining, hardware, stitch and finish.</p>
+          </li>
+          <li class="piece" style="--at: .375">
+            <svg class="piece__svg" viewBox="0 0 200 170" aria-hidden="true">
+              <path class="cut" d="M22 56 Q60 8 100 10 Q140 8 178 56 L150 156 L50 156 Z"/>
+              <path class="seam" d="M32 58 Q66 18 100 18 Q134 18 168 58 L143 148 L57 148 Z"/>
+              <path class="notch" d="M60 26 l3 6 M140 26 l-3 6 M100 10 l0 7"/>
+              <path class="grain" d="M100 38 V136 M96 44 l4 -6 4 6 M96 130 l4 6 4 -6"/>
+              <text class="chalk" x="108" y="90" transform="rotate(-90 108 90)">SLEEVE · CUT 2</text>
+              <text class="marker" x="128" y="150">FedEx, free</text>
+            </svg>
+            <span class="piece__num">2</span>
+            <span class="piece__when">Day 4–14</span>
+            <h3 class="piece__title">Sample shipped</h3>
+            <p class="piece__text">Built in Sialkot and sent free by FedEx. You judge the hide in hand.</p>
+          </li>
+          <li class="piece" style="--at: .625">
+            <svg class="piece__svg" viewBox="0 0 200 170" aria-hidden="true">
+              <path class="cut" d="M28 24 Q100 36 172 24 L184 64 L178 154 L22 154 L16 64 Z"/>
+              <path class="seam" d="M36 32 Q100 44 164 32 L175 66 L170 146 L30 146 L25 66 Z"/>
+              <path class="notch" d="M100 30 l0 7 M18 100 l7 0 M182 100 l-7 0"/>
+              <path class="grain" d="M100 56 V134 M96 62 l4 -6 4 6 M96 128 l4 6 4 -6"/>
+              <text class="chalk" x="108" y="96" transform="rotate(-90 108 96)">BACK · ON FOLD</text>
+              <text class="marker" x="34" y="126">100 / 250 / 500</text>
+              <text class="marker" x="34" y="138">1,000 / 2,500</text>
+            </svg>
+            <span class="piece__num">3</span>
+            <span class="piece__when">Day 15–21</span>
+            <h3 class="piece__title">Quote &amp; PO</h3>
+            <p class="piece__text">Approve the sample and we quote the run at your volume, tiered from 50 units.</p>
+          </li>
+          <li class="piece" style="--at: .875">
+            <svg class="piece__svg" viewBox="0 0 200 170" aria-hidden="true">
+              <path class="cut" d="M14 104 Q100 28 186 104 L172 140 Q100 84 28 140 Z"/>
+              <path class="seam" d="M24 106 Q100 40 176 106 L167 129 Q100 76 33 129 Z"/>
+              <path class="notch" d="M100 62 l0 7 M57 82 l3 6 M143 82 l-3 6"/>
+              <path class="grain" d="M64 116 L136 116 M70 112 l-6 4 6 4 M130 112 l6 4 -6 4"/>
+              <text class="chalk" x="100" y="104" text-anchor="middle">COLLAR · CUT 1</text>
+              <text class="marker" x="60" y="34">4 to 6 weeks</text>
+            </svg>
+            <span class="piece__num">4</span>
+            <span class="piece__when">4–6 weeks</span>
+            <h3 class="piece__title">Delivered</h3>
+            <p class="piece__text">Production, then air or sea freight by urgency. Customs handled, landed at your dock or warehouse.</p>
+          </li>
+        </ol>
+      </div>
       <p class="mt-8"><a class="link-arrow" href="/process/">The full process <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
   <!-- TERMS -->
-  <section class="section section--tint" aria-labelledby="terms-title">
+  <section class="section section--tint home-terms" aria-labelledby="terms-title">
     <div class="container">
       <div class="split split--wide-right">
         <div class="section-head mb-0">
@@ -321,27 +424,36 @@
           <p class="section-head__intro">Per-unit pricing is a landed cost, quoted after you approve the sample.</p>
           <a class="btn btn--primary section-head__link mt-4" href="/sample/">Request a free sample</a>
         </div>
-        <div class="stitched-card stitched stitched--tan">
-        <table class="spec-table spec-table--stack">
-          <caption class="visually-hidden">Sample, order and payment terms</caption>
-          <tbody>
-            <tr><th scope="row">Sample</th><td><strong>Free</strong>, including FedEx courier<span class="muted">No sample fee, no MOQ on samples, no commitment</span></td></tr>
-            <tr><th scope="row">Sample turnaround</th><td>7 to 10 days</td></tr>
-            <tr><th scope="row">Minimum order</th><td>50 to 100 units per style<span class="muted">Jackets usually 100. Bags and structured pieces from 50.</span></td></tr>
-            <tr><th scope="row">Price tiers</th><td><span class="num">100 / 250 / 500 / 1,000 / 2,500</span> units<span class="muted">Per-unit landed cost, quoted after sample approval</span></td></tr>
-            <tr><th scope="row">Production</th><td>4 to 6 weeks</td></tr>
-            <tr><th scope="row">Payment</th><td>Nothing until the sample is approved. Then 50% deposit, 50% on shipment.<span class="muted">Wire or international ACH. Repeat orders can move to net 30 after the first successful run.</span></td></tr>
-            <tr><th scope="row">Branding</th><td>Adds 5 to 10 days and a small per-unit cost</td></tr>
-            <tr><th scope="row">Quality control</th><td>Pre-shipment inspection on every run</td></tr>
-          </tbody>
-        </table>
+        <div class="ledger">
+          <div class="ledger__strap" aria-hidden="true"><span>Terms</span></div>
+          <table class="spec-table spec-table--stack">
+            <caption class="visually-hidden">Sample, order and payment terms</caption>
+            <tbody>
+              <tr><th scope="row">Sample</th><td><strong>Free</strong>, including FedEx courier<span class="muted">No sample fee, no MOQ on samples, no commitment</span></td></tr>
+              <tr><th scope="row">Sample turnaround</th><td>7 to 10 days</td></tr>
+              <tr><th scope="row">Minimum order</th><td>50 to 100 units per style<span class="muted">Jackets usually 100. Bags and structured pieces from 50.</span></td></tr>
+              <tr><th scope="row">Price tiers</th><td><span class="num">100 / 250 / 500 / 1,000 / 2,500</span> units<span class="muted">Per-unit landed cost, quoted after sample approval</span></td></tr>
+              <tr><th scope="row">Production</th><td>4 to 6 weeks</td></tr>
+              <tr><th scope="row">Payment</th><td>Nothing until the sample is approved. Then 50% deposit, 50% on shipment.<span class="muted">Wire or international ACH. Repeat orders can move to net 30 after the first successful run.</span></td></tr>
+              <tr><th scope="row">Branding</th><td>Adds 5 to 10 days and a small per-unit cost</td></tr>
+              <tr><th scope="row">Quality control</th><td>Pre-shipment inspection on every run</td></tr>
+            </tbody>
+          </table>
+          <span class="ledger__rivet ledger__rivet--tl" aria-hidden="true"></span><span class="ledger__rivet ledger__rivet--tr" aria-hidden="true"></span>
+          <span class="ledger__rivet ledger__rivet--bl" aria-hidden="true"></span><span class="ledger__rivet ledger__rivet--br" aria-hidden="true"></span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Strap and buckle divider -->
+  <div class="strap" aria-hidden="true">
+    <span class="strap__band"></span>
+    <svg class="strap__buckle" viewBox="0 0 124 76" width="124" height="76"><defs><linearGradient id="bk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E1A2"/><stop offset=".45" stop-color="#C39342"/><stop offset="1" stop-color="#6E4A18"/></linearGradient><linearGradient id="bk2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A6224"/><stop offset=".5" stop-color="#F3D894"/><stop offset="1" stop-color="#8A6224"/></linearGradient></defs><path d="M36 7H110a8 8 0 0 1 8 8V61a8 8 0 0 1-8 8H36A31 31 0 0 1 36 7Z" fill="none" stroke="url(#bk)" stroke-width="9" stroke-linejoin="round"/><path d="M36 7H110a8 8 0 0 1 8 8V61a8 8 0 0 1-8 8H36A31 31 0 0 1 36 7Z" fill="none" stroke="#4A3010" stroke-opacity=".45" stroke-width="1"/><rect x="31" y="3" width="10" height="70" rx="5" fill="url(#bk2)" stroke="#4A3010" stroke-opacity=".5"/><path d="M38 38H121" stroke="#4A3010" stroke-opacity=".35" stroke-width="7" stroke-linecap="round"/><path d="M38 37H120" stroke="url(#bk)" stroke-width="5" stroke-linecap="round"/></svg>
+  </div>
+
   <!-- FAQ -->
-  <section class="section" aria-labelledby="faq-title">
+  <section class="section home-faq" aria-labelledby="faq-title">
     <div class="container">
       <div class="split split--wide-right">
         <div class="section-head mb-0">
@@ -377,16 +489,19 @@
   </section>
 
   <!-- CTA -->
-  <section class="cta-band" aria-labelledby="cta-title">
+  <section class="cta-band home-cta" aria-labelledby="cta-title">
     <div class="container">
-      <div class="cta-band__inner leather leather--oxblood stitched">
+      <div class="cta-band__inner leather leather--oxblood stitched home-cta__inner">
         <span class="deboss cta-band__deboss" aria-hidden="true"><i></i></span>
         <div>
           <h2 id="cta-title" class="cta-band__title">Send us a style. We'll send back a sample.</h2>
           <p class="cta-band__text mt-4">Mail a piece you already sell, or describe it. We build it in Sialkot and courier it to you free. No fee, no commitment.</p>
         </div>
         <div class="cta-band__actions">
-          <a class="btn btn--light btn--lg" href="/sample/">Request a free sample <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="pulltab pulltab--light" href="/sample/">
+            <span class="pulltab__ring" aria-hidden="true"></span>
+            <span class="pulltab__strap"><span class="pulltab__text">Request a free sample</span></span>
+          </a>
           <a href="mailto:queries@leathergenius.site">queries@leathergenius.site</a>
         </div>
       </div>

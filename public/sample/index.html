@@ -34,8 +34,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Inter:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap">
 
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="stylesheet" href="/assets/site.css?v=7">
-  <script src="/assets/site.js?v=3" defer></script>
+  <link rel="stylesheet" href="/assets/site.css?v=9">
+  <link rel="stylesheet" href="/assets/home.css?v=1">
+  <script src="/assets/site.js?v=4" defer></script>
   <style>
     /* Page-only additions for /sample/ (uses site.css tokens) */
     .assure { display: grid; grid-template-columns: 1fr; margin-top: var(--s-6); border-top: var(--border-strong); border-bottom: var(--border-strong); }
@@ -328,6 +329,62 @@
       styleInput.value = style.trim();
     }
   } catch (e) { /* older browsers: leave the field empty */ }
+
+  // Spec from the homepage swatch book: ?hide=&lining=&hardware=&label=
+  // Only known values are accepted; they land in Notes and on a small leather card.
+  try {
+    var SPEC = [
+      ["hide", "Hide", { "lambskin": "Lambskin, 0.7-0.9 mm", "cowhide": "Cowhide & steer, 1.1-1.4 mm", "goat-suede": "Goat & suede, pebble & nap", "twill": "Twill & canvas, 10-14 oz" }],
+      ["lining", "Lining", { "bemberg": "Bemberg", "quilted": "Quilted" }],
+      ["hardware", "Hardware", { "ykk-brass": "YKK, solid brass", "ykk-nickel": "YKK, antique nickel", "riri-brass": "RIRI, solid brass", "riri-nickel": "RIRI, antique nickel" }],
+      ["label", "Label", { "debossed": "Debossed", "hot-foil": "Hot-foiled", "laser-etched": "Laser-etched", "stitched": "Stitched", "woven": "Woven neck label" }]
+    ];
+    var qs = new URLSearchParams(window.location.search);
+    var got = [], back = [];
+    SPEC.forEach(function (row) {
+      var v = qs.get(row[0]);
+      if (v && Object.prototype.hasOwnProperty.call(row[2], v)) {
+        got.push({ key: row[0], name: row[1], value: v, text: row[2][v] });
+        back.push(row[0] + "=" + encodeURIComponent(v));
+      }
+    });
+    if (got.length) {
+      var notes = document.getElementById("f-notes");
+      if (notes && !notes.value) {
+        notes.value = "Spec from the swatch book:\n" + got.map(function (g) { return g.name + ": " + g.text; }).join("\n") + "\n\n";
+      }
+      var hideRow = got.filter(function (g) { return g.key === "hide"; })[0];
+      var card = document.createElement("aside");
+      card.className = "spec-tag" + (hideRow ? " spec-tag--" + hideRow.value : "");
+      card.setAttribute("aria-label", "Your spec from the swatch book");
+      var inner = document.createElement("div");
+      inner.className = "spec-tag__inner";
+      var head = document.createElement("div");
+      head.className = "spec-tag__head";
+      var title = document.createElement("p");
+      title.className = "spec-tag__title";
+      title.textContent = "Your spec";
+      var edit = document.createElement("a");
+      edit.className = "spec-tag__edit";
+      edit.href = "/?" + back.join("&") + "#spec";
+      edit.textContent = "Change it in the swatch book";
+      head.appendChild(title); head.appendChild(edit);
+      var dl = document.createElement("dl");
+      dl.className = "spec-tag__list";
+      got.forEach(function (g) {
+        var d = document.createElement("div");
+        var dt = document.createElement("dt"); dt.textContent = g.name;
+        var dd = document.createElement("dd"); dd.textContent = g.text;
+        d.appendChild(dt); d.appendChild(dd); dl.appendChild(d);
+      });
+      var note = document.createElement("p");
+      note.className = "spec-tag__note";
+      note.textContent = "Already added to your notes below. Edit them freely.";
+      inner.appendChild(head); inner.appendChild(dl); inner.appendChild(note);
+      card.appendChild(inner);
+      form.insertBefore(card, form.firstChild);
+    }
+  } catch (e) { /* older browsers: no spec card */ }
 
   function val(id) {
     var el = document.getElementById(id);

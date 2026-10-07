@@ -34,42 +34,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Inter:wght@400;500;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&amp;display=swap">
 
   <script>document.documentElement.classList.add("js")</script>
-  <link rel="stylesheet" href="/assets/site.css?v=7">
-  <script src="/assets/site.js?v=3" defer></script>
-
-  <style>
-    /* Process page only: small additions on top of site.css tokens */
-    .process-hero__stats { margin-top: var(--s-7); }
-
-    .step-locks { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-4); }
-    .step-locks li { padding: 4px 10px; border: var(--border-strong); border-radius: var(--r-pill); font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-ink-2); background: var(--c-white); }
-    .step-detail { margin-top: var(--s-4); max-width: 34em; }
-    .step-detail .spec-list__row { padding: var(--s-3) 0; }
-    .step-detail dd { color: var(--c-ink-2); font-size: var(--fs-sm); }
-    .timeline--detail .timeline__step { padding-bottom: var(--s-7); }
-    .timeline--detail .timeline__step:last-child { padding-bottom: 0; }
-    .timeline--detail .timeline__text { max-width: 34em; }
-
-    .spec-table .group th { padding: var(--s-6) 0 var(--s-2); border-bottom: 1px solid var(--c-ink); color: var(--c-accent); width: auto; }
-    .spec-table tbody:first-of-type .group th { padding-top: var(--s-4); }
-
-    .tiers { width: 100%; border-top: 1px solid var(--c-ink); font-variant-numeric: lining-nums tabular-nums; }
-    .tiers th, .tiers td { text-align: left; vertical-align: middle; padding: var(--s-4) var(--s-3) var(--s-4) 0; border-bottom: var(--border); }
-    .tiers thead th { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-muted); padding-top: var(--s-3); padding-bottom: var(--s-3); }
-    .tiers tbody th { font-family: var(--f-serif); font-size: 1.75rem; font-weight: 500; line-height: 1; white-space: nowrap; }
-    .tiers tbody th small { display: block; margin-top: 4px; font-family: var(--f-sans); font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-muted); }
-    .tiers td:last-child { padding-right: 0; width: 55%; }
-    .tier-saving { display: block; font-weight: 600; color: var(--c-ink); }
-    .tier-bar { position: relative; display: block; height: 8px; margin-top: var(--s-2); border-radius: var(--r-pill); background: var(--c-paper-3); }
-    .tier-bar span { position: absolute; top: 0; bottom: 0; border-radius: var(--r-pill); background: var(--c-accent); }
-    .tier-bar--low span { left: 30%; width: 20%; background: var(--c-tan); }
-    .tier-bar--high span { left: 60%; width: 20%; }
-    @media (max-width: 599.98px) {
-      .tiers tbody th { font-size: 1.375rem; }
-      .tiers td:nth-child(2) { font-size: var(--fs-sm); }
-      .tiers thead th { letter-spacing: 0.08em; }
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css?v=9">
+  <link rel="stylesheet" href="/assets/pages.css?v=2">
+  <script src="/assets/site.js?v=4" defer></script>
+  <script src="/assets/pages.js?v=1" defer></script>
 
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -157,22 +125,69 @@
     </div>
   </section>
 
-  <!-- STEPS -->
-  <section class="section" id="steps" aria-labelledby="steps-title">
+  <!-- STEPS: on tailor's pattern paper, joined by a brass zip -->
+  <section class="section pattern-paper" id="steps" aria-labelledby="steps-title">
     <div class="container">
-      <div class="split split--wide-right">
-        <div class="section-head mb-0">
-          <p class="eyebrow">The four steps</p>
-          <h2 id="steps-title">From first message to your dock.</h2>
-          <p class="section-head__intro">About three weeks from first message to an approved sample and your quote. Then 4 to 6 weeks of production before your goods ship.</p>
-          <a class="btn btn--primary section-head__link mt-4" href="/sample/">Start with a free sample <span class="arrow" aria-hidden="true">→</span></a>
+      <div class="split split--wide-right steps-split">
+        <div class="steps-aside">
+          <div class="section-head mb-0">
+            <p class="eyebrow">The four steps</p>
+            <h2 id="steps-title">From first message to your dock.</h2>
+            <p class="section-head__intro">About three weeks from first message to an approved sample and your quote. Then 4 to 6 weeks of production before your goods ship.</p>
+            <a class="btn btn--primary section-head__link mt-4" href="/sample/">Start with a free sample <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+          <svg class="pattern-pieces" viewBox="0 0 420 470" aria-hidden="true" focusable="false">
+            <g fill="rgba(255,253,247,.55)" stroke="#2A1E18" stroke-width="1.6" stroke-linejoin="round">
+              <!-- jacket front -->
+              <path d="M70 40 C100 52 128 56 150 52 L166 70 C170 120 176 150 196 170 L214 176 L222 390 L54 400 C46 300 40 210 46 150 C52 110 60 70 70 40 Z"/>
+              <!-- sleeve -->
+              <path d="M262 70 C292 40 352 40 382 70 C392 84 398 96 400 108 L384 400 L284 404 L262 112 C260 98 258 84 262 70 Z"/>
+              <!-- collar -->
+              <path d="M250 430 C290 412 350 412 392 430 L388 452 C350 440 292 440 254 452 Z"/>
+            </g>
+            <g fill="none" stroke="#2A1E18" stroke-width="1" stroke-dasharray="5 4" opacity=".55">
+              <path d="M80 56 C104 66 128 70 146 66 L156 78 C160 126 168 158 190 182 L204 188 L210 380 L66 388 C58 300 54 212 60 154 C64 116 72 82 80 56 Z"/>
+              <path d="M272 78 C298 54 346 54 372 78 C380 90 386 100 388 110 L374 390 L294 392 L274 112 C272 100 270 88 272 78 Z"/>
+            </g>
+            <g stroke="#2A1E18" stroke-width="1.6" fill="none">
+              <!-- notches -->
+              <path d="M46 230 l12 0 M214 260 l-12 0 M262 150 l12 2 M396 170 l-12 0 M321 44 l0 12"/>
+              <!-- grain lines -->
+              <path d="M130 120 V330 M124 132 l6 -12 6 12 M124 318 l6 12 6 -12"/>
+              <path d="M330 110 V350 M324 122 l6 -12 6 12 M324 338 l6 12 6 -12"/>
+              <!-- dart -->
+              <path d="M150 400 L160 300 L170 400" stroke-dasharray="3 3"/>
+            </g>
+            <g class="pattern-pieces__chalk" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-weight="600" fill="#8E3A2E">
+              <text x="88" y="250" font-size="17">Front</text>
+              <text x="88" y="270" font-size="13">cut 2</text>
+              <text x="296" y="250" font-size="17">Sleeve</text>
+              <text x="296" y="270" font-size="13">cut 2</text>
+              <text x="282" y="468" font-size="13">Collar, cut 1</text>
+            </g>
+            <g font-family="Inter, Arial, sans-serif" font-size="8.5" font-weight="600" letter-spacing="1.6" fill="#2A1E18" opacity=".7">
+              <text x="138" y="230" transform="rotate(-90 138 230)">GRAIN</text>
+              <text x="338" y="240" transform="rotate(-90 338 240)">GRAIN</text>
+            </g>
+          </svg>
         </div>
 
-        <ol class="timeline timeline--detail">
-          <li class="timeline__step">
-            <span class="timeline__when">Day 1–3</span>
-            <h3 class="timeline__title">Spec the sample</h3>
-            <p class="timeline__text">Mail us a piece you already sell, or describe the style. We match it. Before anything is cut, we agree the details with you and lock them:</p>
+        <div class="zip-steps">
+          <div class="zip" data-zip aria-hidden="true">
+            <span class="zip__run zip__run--open"><span class="zip__tape zip__tape--l"></span><span class="zip__tape zip__tape--r"></span></span>
+            <span class="zip__run zip__run--closed"><span class="zip__tape zip__tape--l"></span><span class="zip__tape zip__tape--r"></span></span>
+            <span class="zip__stop zip__stop--top"></span>
+            <span class="zip__stop zip__stop--bottom"></span>
+            <span class="zip__slider"><span class="zip__pull"></span></span>
+          </div>
+          <ol class="zip-list">
+          <li class="zip-step">
+            <span class="zip-step__no" aria-hidden="true">01</span>
+            <div class="step-card">
+
+            <span class="step-card__when chalk">Day 1–3</span>
+            <h3 class="step-card__title">Spec the sample</h3>
+            <p class="step-card__text">Mail us a piece you already sell, or describe the style. We match it. Before anything is cut, we agree the details with you and lock them:</p>
             <ul class="step-locks" aria-label="What we lock at the spec stage">
               <li>Hide</li><li>Weight</li><li>Lining</li><li>Hardware</li><li>Stitch</li><li>Finish</li>
             </ul>
@@ -180,36 +195,50 @@
               <div class="spec-list__row"><dt>What you send</dt><dd>A sample piece by post, or a description of the style</dd></div>
               <div class="spec-list__row"><dt>What we lock</dt><dd>A named leather, weight and finish, so unit 5,000 matches the sample. <a href="/capabilities/#materials">See materials</a></dd></div>
             </dl>
+            </div>
           </li>
-          <li class="timeline__step">
-            <span class="timeline__when">Day 4–14</span>
-            <h3 class="timeline__title">Sample shipped</h3>
-            <p class="timeline__text">We build the piece in Sialkot and courier it to you free by FedEx. You judge the hide in hand, not from a photo.</p>
+          <li class="zip-step">
+            <span class="zip-step__no" aria-hidden="true">02</span>
+            <div class="step-card">
+
+            <span class="step-card__when chalk">Day 4–14</span>
+            <h3 class="step-card__title">Sample shipped</h3>
+            <p class="step-card__text">We build the piece in Sialkot and courier it to you free by FedEx. You judge the hide in hand, not from a photo.</p>
             <dl class="spec-list step-detail">
               <div class="spec-list__row"><dt>Turnaround</dt><dd>7 to 10 days</dd></div>
               <div class="spec-list__row"><dt>Cost to you</dt><dd>None. No sample fee, no minimum on samples, no commitment.</dd></div>
             </dl>
+            </div>
           </li>
-          <li class="timeline__step">
-            <span class="timeline__when">Day 15–21</span>
-            <h3 class="timeline__title">Quote &amp; PO</h3>
-            <p class="timeline__text">Approve the sample and we quote the run at your volume, tiered from 50 units. You place the PO when the numbers work for you.</p>
+          <li class="zip-step">
+            <span class="zip-step__no" aria-hidden="true">03</span>
+            <div class="step-card">
+
+            <span class="step-card__when chalk">Day 15–21</span>
+            <h3 class="step-card__title">Quote &amp; PO</h3>
+            <p class="step-card__text">Approve the sample and we quote the run at your volume, tiered from 50 units. You place the PO when the numbers work for you.</p>
             <dl class="spec-list step-detail">
               <div class="spec-list__row"><dt>Quote</dt><dd>Per-unit landed cost. <a href="#pricing">How quotes work</a></dd></div>
               <div class="spec-list__row"><dt>Payment</dt><dd>50% deposit with the PO, 50% on shipment</dd></div>
             </dl>
+            </div>
           </li>
-          <li class="timeline__step">
-            <span class="timeline__when">4–6 weeks</span>
-            <h3 class="timeline__title">Delivered</h3>
-            <p class="timeline__text">Production, a pre-shipment inspection, then air or sea freight depending on how urgently you need the goods. Customs handled. Your order lands at your dock or warehouse.</p>
+          <li class="zip-step">
+            <span class="zip-step__no" aria-hidden="true">04</span>
+            <div class="step-card">
+
+            <span class="step-card__when chalk">4–6 weeks</span>
+            <h3 class="step-card__title">Delivered</h3>
+            <p class="step-card__text">Production, a pre-shipment inspection, then air or sea freight depending on how urgently you need the goods. Customs handled. Your order lands at your dock or warehouse.</p>
             <dl class="spec-list step-detail">
               <div class="spec-list__row"><dt>Production</dt><dd>4 to 6 weeks. Branding adds 5 to 10 days.</dd></div>
               <div class="spec-list__row"><dt>Freight</dt><dd>Air or sea, by urgency</dd></div>
               <div class="spec-list__row"><dt>Arrives</dt><dd>At your dock or warehouse, customs handled</dd></div>
             </dl>
+            </div>
           </li>
-        </ol>
+          </ol>
+        </div>
       </div>
     </div>
   </section>
@@ -224,36 +253,38 @@
           <p class="section-head__intro">Sample, order, payment and delivery on one page. Questions on any line? Write to <a href="mailto:queries@leathergenius.site">queries@leathergenius.site</a>.</p>
         </div>
 
-        <div class="stitched-card stitched stitched--tan">
-        <table class="spec-table spec-table--stack">
+        <div class="ledger-book">
+          <div class="ledger-book__page">
+          <table class="spec-table spec-table--stack ledger-book__table">
           <caption class="visually-hidden">Leather Genius supplier terms: sample, order, payment and delivery</caption>
           <tbody>
-            <tr class="group"><th colspan="2" scope="rowgroup">Sample</th></tr>
+            <tr class="group"><th colspan="2" scope="rowgroup"><span class="ledger-book__band"><span class="foil">Sample</span></span></th></tr>
             <tr><th scope="row">Sample cost</th><td><strong>Free</strong>, including FedEx courier<span class="muted">No sample fee, no minimum on samples, no commitment</span></td></tr>
             <tr><th scope="row">Sample turnaround</th><td>7 to 10 days</td></tr>
           </tbody>
           <tbody>
-            <tr class="group"><th colspan="2" scope="rowgroup">Order</th></tr>
+            <tr class="group"><th colspan="2" scope="rowgroup"><span class="ledger-book__band"><span class="foil">Order</span></span></th></tr>
             <tr><th scope="row">Minimum order</th><td>50 to 100 units per style<span class="muted">Jackets usually 100. Bags and structured pieces from 50.</span></td></tr>
             <tr><th scope="row">Production lead time</th><td>4 to 6 weeks</td></tr>
             <tr><th scope="row">Branding</th><td>Adds 5 to 10 days and a small per-unit cost<span class="muted">Debossed, hot-foiled, laser-etched or stitched marks. Woven neck labels, hang tags, dust bags and boxes to spec.</span></td></tr>
             <tr><th scope="row">Pricing</th><td>Per-unit landed cost, quoted after sample approval<span class="muted">Tiered at 100, 250, 500, 1,000 and 2,500 units</span></td></tr>
           </tbody>
           <tbody>
-            <tr class="group"><th colspan="2" scope="rowgroup">Payment</th></tr>
+            <tr class="group"><th colspan="2" scope="rowgroup"><span class="ledger-book__band"><span class="foil">Payment</span></span></th></tr>
             <tr><th scope="row">Before approval</th><td>Nothing until you approve the sample</td></tr>
             <tr><th scope="row">First order</th><td>50% deposit, 50% on shipment</td></tr>
             <tr><th scope="row">Method</th><td>Wire transfer or international ACH</td></tr>
             <tr><th scope="row">Repeat orders</th><td>Net 30 possible after the first successful run</td></tr>
           </tbody>
           <tbody>
-            <tr class="group"><th colspan="2" scope="rowgroup">Delivery</th></tr>
+            <tr class="group"><th colspan="2" scope="rowgroup"><span class="ledger-book__band"><span class="foil">Delivery</span></span></th></tr>
             <tr><th scope="row">Shipping</th><td>Air or sea freight, chosen by urgency</td></tr>
             <tr><th scope="row">Customs</th><td>Handled</td></tr>
             <tr><th scope="row">Delivered to</th><td>Your dock or warehouse</td></tr>
             <tr><th scope="row">Quality control</th><td>Pre-shipment inspection on every run<span class="muted"><a href="#quality">What we check</a></span></td></tr>
           </tbody>
-        </table>
+          </table>
+          </div>
         </div>
       </div>
     </div>
@@ -270,8 +301,46 @@
         <p class="section-head__intro">We do not publish a price list. Your price depends on the hide, lining, hardware and branding you lock, and on volume. So we quote a per-unit landed cost once you approve the sample, at each tier below.</p>
       </div>
 
-      <div class="split split--wide-right">
-        <div class="grid">
+      <ol class="straps" aria-label="Price tiers and typical saving against US domestic make">
+          <li class="strap" style="--len: 40%">
+            <div class="strap__band"><span class="strap__buckle" aria-hidden="true"></span><span class="strap__run"><span class="foil"><b>100</b> units</span></span></div>
+            <dl class="strap__meta">
+              <div><dt>Per-unit price</dt><dd>In your quote</dd></div>
+              <div><dt>Typical saving vs. US make</dt><dd>15 to 25% less</dd></div>
+            </dl>
+          </li>
+          <li class="strap" style="--len: 55%">
+            <div class="strap__band"><span class="strap__buckle" aria-hidden="true"></span><span class="strap__run"><span class="foil"><b>250</b> units</span></span></div>
+            <dl class="strap__meta">
+              <div><dt>Per-unit price</dt><dd>In your quote</dd></div>
+              <div><dt>Typical saving vs. US make</dt><dd>30 to 40% less</dd></div>
+            </dl>
+          </li>
+          <li class="strap" style="--len: 70%">
+            <div class="strap__band"><span class="strap__buckle" aria-hidden="true"></span><span class="strap__run"><span class="foil"><b>500</b> units</span></span></div>
+            <dl class="strap__meta">
+              <div><dt>Per-unit price</dt><dd>In your quote</dd></div>
+              <div><dt>Typical saving vs. US make</dt><dd>30 to 40% less</dd></div>
+            </dl>
+          </li>
+          <li class="strap" style="--len: 85%">
+            <div class="strap__band"><span class="strap__buckle" aria-hidden="true"></span><span class="strap__run"><span class="foil"><b>1,000</b> units</span></span></div>
+            <dl class="strap__meta">
+              <div><dt>Per-unit price</dt><dd>In your quote</dd></div>
+              <div><dt>Typical saving vs. US make</dt><dd>30 to 40% less</dd></div>
+            </dl>
+          </li>
+          <li class="strap" style="--len: 100%">
+            <div class="strap__band"><span class="strap__buckle" aria-hidden="true"></span><span class="strap__run"><span class="foil"><b>2,500</b> units</span></span></div>
+            <dl class="strap__meta">
+              <div><dt>Per-unit price</dt><dd>In your quote</dd></div>
+              <div><dt>Typical saving vs. US make</dt><dd>30 to 40% less</dd></div>
+            </dl>
+          </li>
+      </ol>
+      <p class="small muted mt-4 straps__note">Strap length shows run size. Saving compared with domestic (US) make. It holds at 30 to 40% from 250 units up. Below 250 units it narrows to 15 to 25%. Branding adds a small per-unit cost, shown in the quote.</p>
+
+      <div class="grid grid--3 mt-8 pricing-feats">
           <article class="feature">
             <span class="feature__num">01</span>
             <h3 class="feature__title">Quoted after approval</h3>
@@ -288,44 +357,6 @@
             <p class="feature__text">You see the price at every tier, so you can pick the run size that fits your season. Quotes are tiered from 50 units.</p>
           </article>
         </div>
-
-        <div>
-          <table class="tiers">
-            <caption class="visually-hidden">Price tiers and typical saving against US domestic make</caption>
-            <thead>
-              <tr><th scope="col">Run size</th><th scope="col">Per-unit price</th><th scope="col">Typical saving vs. US make</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">100<small>units</small></th>
-                <td>In your quote</td>
-                <td><span class="tier-saving">15 to 25% less</span><span class="tier-bar tier-bar--low" aria-hidden="true"><span></span></span></td>
-              </tr>
-              <tr>
-                <th scope="row">250<small>units</small></th>
-                <td>In your quote</td>
-                <td><span class="tier-saving">30 to 40% less</span><span class="tier-bar tier-bar--high" aria-hidden="true"><span></span></span></td>
-              </tr>
-              <tr>
-                <th scope="row">500<small>units</small></th>
-                <td>In your quote</td>
-                <td><span class="tier-saving">30 to 40% less</span><span class="tier-bar tier-bar--high" aria-hidden="true"><span></span></span></td>
-              </tr>
-              <tr>
-                <th scope="row">1,000<small>units</small></th>
-                <td>In your quote</td>
-                <td><span class="tier-saving">30 to 40% less</span><span class="tier-bar tier-bar--high" aria-hidden="true"><span></span></span></td>
-              </tr>
-              <tr>
-                <th scope="row">2,500<small>units</small></th>
-                <td>In your quote</td>
-                <td><span class="tier-saving">30 to 40% less</span><span class="tier-bar tier-bar--high" aria-hidden="true"><span></span></span></td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="small muted mt-4">Saving compared with domestic (US) make. It holds at 30 to 40% from 250 units up. Below 250 units it narrows to 15 to 25%. Branding adds a small per-unit cost, shown in the quote. Bars show the saving range on a 0 to 50% scale.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -339,7 +370,7 @@
           <p class="section-head__intro">Every run includes a pre-shipment inspection. If a unit is flagged, the shipment holds until it is remade. You are welcome to send your own inspector or visit the floor.</p>
           <a class="link-arrow section-head__link mt-4" href="/capabilities/#quality">Full quality control checklist <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <ul class="checklist">
+        <ul class="checklist checklist--rivet">
           <li><strong>Hide grade verification</strong>, against the leather locked at sample stage</li>
           <li><strong>Stitch density</strong></li>
           <li><strong>Zipper and hardware cycling</strong></li>
@@ -359,7 +390,7 @@
           <h2 id="faq-title">Questions buyers ask before the first order.</h2>
           <p class="section-head__intro">Not covered here? Write to <a href="mailto:queries@leathergenius.site">queries@leathergenius.site</a>. We reply within 24 hours on weekdays.</p>
         </div>
-        <div class="faq">
+        <div class="faq faq--tabs">
           <details class="faq__item">
             <summary>What is your minimum order?</summary>
             <div class="faq__answer"><p>50 to 100 units per style for production. Jackets usually start at 100, bags and structured pieces from 50. Samples have no minimum.</p></div>
