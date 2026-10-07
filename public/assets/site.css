@@ -406,14 +406,20 @@ h4, .h4 { font-size: var(--fs-h4); }
 
 .brand { display: inline-flex; flex-direction: column; align-items: flex-start; text-decoration: none; color: var(--c-ink); line-height: 1; }
 .brand:hover { color: var(--c-ink); }
-.brand__logo { height: 30px; width: auto; transition: height .2s var(--ease); }
-@media (min-width: 400px) { .brand__logo { height: 34px; } }
+.brand { --logo-h: 27px; }
+@media (min-width: 400px) { .brand { --logo-h: 34px; } }
+@media (min-width: 900px) { .brand { --logo-h: 40px; } }
+.brand__logo { height: var(--logo-h); width: auto; transition: height .2s var(--ease); }
 .brand__tag {
   margin-top: 6px;
-  margin-left: 54px;              /* aligns under the wordmark (≈1.81 × logo height) */
+  /* spans exactly under the wordmark: it starts 1.6675x and is 6.1675x the logo height wide */
+  margin-left: calc(var(--logo-h) * 1.6675);
+  width: calc(var(--logo-h) * 6.1675);
+  text-align: justify;
+  text-align-last: justify;
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--c-muted);
   white-space: nowrap;
@@ -422,12 +428,12 @@ h4, .h4 { font-size: var(--fs-h4); }
   transition: opacity .2s var(--ease), max-height .2s var(--ease), margin .2s var(--ease);
 }
 @media (max-width: 399.98px) {
-  .brand__tag { letter-spacing: 0.07em; font-size: 9.5px; }
+  .brand__tag { letter-spacing: 0; font-size: 8.5px; }
   .site-header .nav-toggle { padding: 8px 10px; }
 }
-@media (min-width: 400px) { .brand__tag { margin-left: 62px; } }
-@media (min-width: 900px) { .brand__logo { height: 40px; } .brand__tag { margin-left: 73px; font-size: 10.5px; } }
-.site-header.is-compact .brand__logo { height: 30px; }
+@media (min-width: 900px) { .brand__tag { font-size: 11px; } }
+.site-header.is-compact .brand { --logo-h: 30px; }
+@media (max-width: 399.98px) { .site-header.is-compact .brand { --logo-h: 27px; } }
 
 .nav { width: 100%; }
 .nav__list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-1) var(--s-5); margin: 0; }
@@ -1192,8 +1198,8 @@ html.js .stitched.has-stitch::before { display: none; }
 .deboss--word { --ratio: 7.835; }  /* full wordmark */
 .deboss::before, .deboss::after, .deboss > i {
   content: ""; position: absolute; inset: 0;
-  -webkit-mask: url("/images/logo.svg") 0 0 / auto 100% no-repeat;
-  mask: url("/images/logo.svg") 0 0 / auto 100% no-repeat;
+  -webkit-mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
+  mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
 }
 .deboss::before { background: var(--hi); transform: translateY(1px); }
 .deboss > i { background: var(--lo); transform: translateY(-1px); }
