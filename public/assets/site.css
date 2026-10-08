@@ -290,6 +290,9 @@ h3, h4, .h3, .h4 {
 
 .brand { display: inline-flex; align-items: center; text-decoration: none; color: var(--c-ink); line-height: 1; }
 .brand:hover { color: var(--c-ink); }
+/* Where we are, in plain words beside the logo (normal case, normal tracking). */
+.brand__place { margin-left: 14px; padding-left: 14px; border-left: 1px solid var(--c-line, #DCCFBC); font-family: var(--f-body); font-size: 14px; line-height: 1.2; color: var(--c-muted, #6B6159); white-space: nowrap; }
+@media (max-width: 559.98px) { .brand__place { display: none; } }
 .brand__logo { height: 26px; width: auto; }
 @media (min-width: 400px) { .brand__logo { height: 30px; } }
 @media (min-width: 900px) { .brand__logo { height: 34px; } }
