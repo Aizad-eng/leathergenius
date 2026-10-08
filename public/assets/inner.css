@@ -1,137 +1,118 @@
 /* ==========================================================================
    Leather Genius: inner pages (inner.css)
    Used by /capabilities/ and /process/. Loaded after site.css.
-   Same plain, editorial look as the homepage (home.css): hairline rules,
-   one column of reading text, no cards. Fonts only via the tokens in site.css.
+   Same system as the homepage (home.css): 12-column grid, section heading
+   in columns 1-4, reading text in columns 5-11, one section spacing value,
+   hairlines between sections (the one tinted band needs none).
 
-   1. Shared        .ip, .ip-btn, .ip-head, .ip-sec
-   2. Tables        .ip-table (terms style), .ip-mat (materials with swatches)
+   1. Shared        .ip, .ip-head, .ip-sec
+   2. Tables        .ip-table, .ip-mat (materials with swatches)
    3. Text blocks   .ip-steps, .ip-list, .ip-facts, .ip-qa, .ip-contact
    ========================================================================== */
 
 /* 1. Shared ---------------------------------------------------------------- */
-.ip { --ip-measure: 36em; font-variant-numeric: oldstyle-nums proportional-nums; hanging-punctuation: first; }
-.ip h1, .ip h2 { font-weight: 400; font-style: normal; letter-spacing: 0; font-variant-numeric: lining-nums; }
-.ip h3 { font-family: var(--f-body); font-weight: 600; font-style: normal; letter-spacing: 0; font-size: var(--fs-base); line-height: 1.4; }
 .ip p { text-wrap: pretty; }
-.ip a:not([class]) { color: var(--c-accent); }
-
-.ip-btn {
-  display: inline-block; padding: 14px 24px 15px;
-  background: var(--c-accent); color: #FFF8F0; border: 1px solid var(--c-accent); border-radius: 2px;
-  font-family: var(--f-sans); font-size: .9375rem; font-weight: 600; letter-spacing: .01em; line-height: 1.2;
-  text-decoration: none; transition: background-color .15s var(--ease);
-}
-.ip-btn:hover { background: var(--c-accent-2); color: #FFFFFF; }
 
 /* Page head */
-.ip-head { padding: var(--s-7) 0 var(--s-7); border-bottom: var(--border); }
-.ip-head h1 { font-size: clamp(1.95rem, 1.45rem + 2vw, 2.875rem); line-height: 1.12; max-width: 14em; text-wrap: pretty; }
-.ip-head__lede { margin-top: var(--s-5); max-width: 33em; font-size: var(--fs-md); line-height: 1.6; color: var(--c-ink-2); }
-.ip-head__jump { margin-top: var(--s-5); max-width: 40em; font-size: var(--fs-sm); line-height: 1.8; color: var(--c-muted); }
+.ip-head { padding: var(--sec-top) 0 var(--sec); }
+.ip-head h1 { max-width: 16em; }
+.ip-head__lede { margin-top: var(--s-5); max-width: 34em; font-size: var(--t-20); line-height: 1.5; color: var(--c-ink-2); }
+.ip-head__jump { margin-top: var(--s-5); max-width: var(--measure); font-size: var(--t-15); line-height: 1.7; color: var(--c-muted); }
 .ip-head__jump a { white-space: nowrap; }
 
-/* Section: title in a narrow left column, text to the right */
-.ip-sec { padding: var(--s-8) 0; }
-.ip-sec + .ip-sec { border-top: var(--border); }
+/* Sections: title in columns 1-4, text in 5-11 */
+.ip-sec { padding: var(--sec) 0; border-top: var(--border); }
 .ip-sec--tint { background: var(--c-paper-2); }
 .ip-sec--tint, .ip-sec--tint + .ip-sec { border-top: 0; }
-.ip-sec__grid { display: grid; gap: var(--s-5); }
-.ip-sec__title { font-size: clamp(1.5rem, 1.35rem + .7vw, 1.875rem); line-height: 1.2; }
-.ip-sec__title--big { font-size: clamp(1.6rem, 1.4rem + .9vw, 2.125rem); }
-.ip-sec__title--plain { font-family: var(--f-body); font-size: 1.3rem; font-weight: 700; margin-bottom: var(--s-4); }
-.ip-body { max-width: var(--ip-measure); }
-.ip-body > p { font-size: 1.0625rem; line-height: 1.7; }
+.ip-sec__grid, .ip-contact__grid, .ip-head__inner { display: grid; gap: var(--s-5) var(--col-gap); }
+.ip-head__inner { gap: 0; }
+.ip-sec__title--plain { margin-bottom: var(--s-5); }
+.ip-body { max-width: var(--measure); }
 .ip-body > p + p { margin-top: var(--s-4); }
-.ip-body > * + .ip-table, .ip-body > * + .ip-mat, .ip-body > * + .ip-list, .ip-body > * + h3 { margin-top: var(--s-5); }
+.ip-body > * + .ip-table, .ip-body > * + .ip-mat, .ip-body > * + .ip-list, .ip-body > * + .ip-steps, .ip-body > * + h3 { margin-top: var(--s-5); }
 .ip-body > .ip-table + p, .ip-body > .ip-mat + p, .ip-body > .ip-list + p { margin-top: var(--s-4); }
-.ip-note { font-size: var(--fs-sm) !important; line-height: 1.55 !important; color: var(--c-ink-2); }
-.ip-date { margin-top: 4px; font-style: italic; font-size: var(--fs-sm); color: var(--c-muted); }
+.ip-note { font-size: var(--t-15); line-height: 1.55; color: var(--c-muted); }
+.ip-date { margin-top: var(--s-2); font-size: var(--t-13); color: var(--c-muted); }
 
 @media (min-width: 900px) {
-  .ip-head { padding: var(--s-8) 0 var(--s-8); }
-  .ip-head__inner { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-5); }
+  .ip-sec__grid, .ip-contact__grid, .ip-head__inner { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; }
   .ip-head__inner > * { grid-column: 1 / span 8; }
-  .ip-head__lede { font-size: var(--fs-lg); }
-  .ip-sec { padding: var(--s-9) 0; }
-  .ip-sec__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-5); align-items: start; }
   .ip-sec__grid > .ip-sec__aside-title { grid-column: 1 / span 4; }
   .ip-sec__grid > .ip-body { grid-column: 5 / span 7; }
   .ip-sec__grid > .ip-body--wide { grid-column: 5 / -1; max-width: none; }
-  .ip-sec__grid > .ip-body--wide > p { max-width: var(--ip-measure); }
-  /* letter-style section: text first, facts to the side */
-  .ip-sec__grid--letter > .ip-body { grid-column: 2 / span 6; }
-  .ip-sec__grid--letter > .ip-facts { grid-column: 9 / -1; margin-top: var(--s-8); }
+  .ip-sec__grid > .ip-body--wide > p { max-width: var(--measure); }
+  /* letter-style section: text first (from column 1, like every heading), facts to the side */
+  .ip-sec__grid--letter > .ip-body { grid-column: 1 / span 7; }
+  .ip-sec__grid--letter > .ip-facts { grid-column: 9 / -1; }
 }
 
 /* 2. Tables ---------------------------------------------------------------- */
-/* Terms style: plain bold row heads, hairlines between rows */
-.ip-table { width: 100%; border-top: 1px solid var(--c-ink); border-bottom: 1px solid var(--c-ink); }
+/* One table style: ink rule on top, hairlines between rows, 15px text,
+   Bitter 600 sentence-case heads, tabular numbers. */
+.ip-table, .ip-mat { width: 100%; border-top: 1px solid var(--c-ink); border-bottom: var(--border); font-size: var(--t-15); line-height: 1.5; font-variant-numeric: lining-nums tabular-nums; }
 .ip-table tr + tr { border-top: var(--border); }
-.ip-table th, .ip-table td { display: block; text-align: left; vertical-align: baseline; }
-.ip-table th { padding: var(--s-3) 0 0; font-weight: 600; font-size: var(--fs-base); line-height: 1.55; color: var(--c-ink); }
-.ip-table td { padding: 2px 0 var(--s-3); line-height: 1.55; font-variant-numeric: lining-nums; }
+.ip-table th, .ip-table td { display: block; text-align: left; vertical-align: top; }
+.ip-table th { padding: var(--s-3) 0 0; font-weight: 600; color: var(--c-ink); }
+.ip-table td { padding: 2px 0 var(--s-3); color: var(--c-ink-2); }
 .ip-table thead { display: none; }
 @media (min-width: 600px) {
   .ip-table th, .ip-table td { display: table-cell; padding: var(--s-3) var(--s-4) var(--s-3) 0; }
   .ip-table tbody th { width: 30%; }
   .ip-table td:last-child { padding-right: 0; }
   .ip-table thead { display: table-header-group; }
-  .ip-table thead th { padding-top: var(--s-2); padding-bottom: var(--s-2); font-size: var(--fs-sm); color: var(--c-ink-2); border-bottom: var(--border); }
+  .ip-table thead th { font-weight: 600; color: var(--c-ink); }
+  .ip-table thead + tbody tr:first-child { border-top: var(--border); }
 }
 
-/* Materials: swatch, name + weight, uses */
-.ip-mat { width: 100%; border-top: 1px solid var(--c-ink); border-bottom: 1px solid var(--c-ink); }
-.ip-mat thead th { padding: var(--s-2) var(--s-3) var(--s-2) 0; border-bottom: var(--border); text-align: left; font-weight: 600; font-size: var(--fs-sm); color: var(--c-ink-2); }
+/* Materials: swatch, name, weight, uses */
+.ip-mat thead th { padding: var(--s-3) var(--s-3) var(--s-3) 0; border-bottom: var(--border); text-align: left; font-weight: 600; color: var(--c-ink); }
 .ip-mat tbody tr + tr { border-top: var(--border); }
-.ip-mat tbody th, .ip-mat tbody td { padding: var(--s-4) var(--s-3) var(--s-4) 0; text-align: left; vertical-align: top; line-height: 1.5; }
+.ip-mat tbody th, .ip-mat tbody td { padding: var(--s-3) var(--s-3) var(--s-3) 0; text-align: left; vertical-align: middle; }
 .ip-mat tbody th { font-weight: 600; color: var(--c-ink); }
 .ip-mat td:last-child { padding-right: 0; color: var(--c-ink-2); }
-.ip-mat__w { white-space: nowrap; font-variant-numeric: lining-nums; color: var(--c-ink-2); }
+.ip-mat__w { white-space: nowrap; color: var(--c-ink-2); }
 .ip-mat__sw { width: 60px; }
-.ip-mat__sw img { display: block; width: 44px; height: 44px; object-fit: cover; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
+.ip-mat__sw img { display: block; width: 40px; height: 40px; object-fit: cover; border-radius: 50%; }
 @media (max-width: 599px) {
   .ip-mat thead { display: none; }
-  .ip-mat tbody tr { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: var(--s-3); padding: var(--s-4) 0; }
+  .ip-mat tbody tr { display: grid; grid-template-columns: 52px minmax(0, 1fr); column-gap: var(--s-3); padding: var(--s-3) 0; }
   .ip-mat tbody th, .ip-mat tbody td { padding: 0; }
   .ip-mat__sw { grid-row: 1 / span 3; width: auto; }
-  .ip-mat tbody td.ip-mat__w { grid-column: 2; font-size: var(--fs-sm); }
-  .ip-mat tbody td:last-child { grid-column: 2; margin-top: 2px; font-size: var(--fs-sm); }
+  .ip-mat tbody td.ip-mat__w { grid-column: 2; }
+  .ip-mat tbody td:last-child { grid-column: 2; }
 }
 
 /* 3. Text blocks ----------------------------------------------------------- */
 /* Numbered steps, same as the homepage's "How an order goes" */
 .ip-steps { counter-reset: step; }
-.ip-steps li { counter-increment: step; position: relative; padding-left: 2.4em; font-size: 1.0625rem; line-height: 1.7; }
-.ip-steps li + li { margin-top: var(--s-5); }
-.ip-steps li::before { content: counter(step) "."; position: absolute; left: 0; top: 0; font-family: var(--f-body); font-weight: 700; line-height: 1.7; color: var(--c-accent); font-variant-numeric: lining-nums; }
+.ip-steps li { counter-increment: step; position: relative; padding-left: 2em; }
+.ip-steps li + li { margin-top: var(--s-4); }
+.ip-steps li::before { content: counter(step) "."; position: absolute; left: 0; top: 0; font-weight: 600; color: var(--c-accent); font-variant-numeric: lining-nums tabular-nums; }
 
 /* Short plain list with hairlines */
 .ip-list { border-top: var(--border); }
 .ip-list li { padding: var(--s-2) 0; border-bottom: var(--border); line-height: 1.5; }
 
-/* Side facts (workshop) */
-.ip-facts { border-top: 1px solid var(--c-ink); }
-.ip-facts h3 { padding-top: var(--s-3); }
-.ip-facts dl { margin: var(--s-2) 0 0; }
+/* Side facts (workshop): aside title on the h2's line box, so tops align */
+.ip-facts h3 { line-height: 30px; margin-bottom: var(--s-5); }
+.ip-facts dl { margin: 0; border-top: 1px solid var(--c-ink); }
 .ip-facts div { padding: var(--s-3) 0; border-bottom: var(--border); }
-.ip-facts dt { font-weight: 600; font-size: var(--fs-sm); color: var(--c-ink); line-height: 1.4; }
-.ip-facts dd { margin: 2px 0 0; font-size: var(--fs-sm); color: var(--c-ink-2); line-height: 1.5; font-variant-numeric: lining-nums; }
+.ip-facts dt { font-weight: 600; font-size: var(--t-15); color: var(--c-ink); line-height: 1.4; }
+.ip-facts dd { margin: 2px 0 0; font-size: var(--t-15); color: var(--c-ink-2); line-height: 1.5; font-variant-numeric: lining-nums tabular-nums; }
 
-.ip-sign { margin-top: var(--s-5); font-style: italic; font-size: var(--fs-md); color: var(--c-ink-2); }
+.ip-sign { margin-top: var(--s-5); font-style: italic; color: var(--c-muted); }
 
 /* FAQ as plain Q and A */
 .ip-qa div + div { margin-top: var(--s-5); }
-.ip-qa dt { font-weight: 700; font-size: 1.0625rem; line-height: 1.4; }
-.ip-qa dd { margin: 4px 0 0; line-height: 1.65; color: var(--c-ink-2); }
+.ip-qa dt { font-weight: 600; color: var(--c-ink); line-height: 1.4; }
+.ip-qa dd { margin: var(--s-1) 0 0; }
 
 /* Contact line at the foot of the page */
-.ip-contact { padding: var(--s-8) 0 var(--s-9); border-top: var(--border); }
-.ip-contact__inner { max-width: 32em; }
-.ip-contact p:first-child { font-family: var(--f-body); font-size: clamp(1.2rem, 1.1rem + .5vw, 1.45rem); line-height: 1.45; }
+.ip-contact { padding: var(--sec) 0; border-top: var(--border); }
+.ip-contact__inner { max-width: var(--measure); }
+.ip-contact p:first-child { font-size: var(--t-20); line-height: 1.5; color: var(--c-ink); }
 .ip-contact a:not([class]) { overflow-wrap: anywhere; }
 .ip-contact__act { margin-top: var(--s-5); }
 @media (min-width: 900px) {
-  .ip-contact__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-5); }
   .ip-contact__inner { grid-column: 5 / span 7; }
 }
