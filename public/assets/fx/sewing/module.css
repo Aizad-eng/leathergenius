@@ -1,0 +1,23 @@
+/* Leather Genius FX: sewing machine. The host element sets the size. */
+.lgfx-sewing {
+  position: relative;
+  overflow: hidden;
+  background: #231a14;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+.lgfx-sewing__canvas,
+.lgfx-sewing__still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.lgfx-sewing__canvas { cursor: pointer; opacity: 0; transition: opacity .6s ease; }
+.lgfx-sewing.is-ready .lgfx-sewing__canvas { opacity: 1; }
+@media (max-width: 600px) { .lgfx-sewing { aspect-ratio: 4 / 5; } }
+.lgfx-sewing.no-fade .lgfx-sewing__canvas { transition: none; }

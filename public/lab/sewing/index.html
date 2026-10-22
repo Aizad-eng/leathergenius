@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sewing machine | Leather Genius lab</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/fx/sewing/module.css">
+  <style>
+    .lab-full { height: 100vh; min-height: 520px; aspect-ratio: auto; border-radius: 0; }
+    .lab-note { color: var(--c-muted); margin-top: .75rem; }
+    .lab-pair { display: grid; gap: 2rem; align-items: center; }
+    @media (min-width: 900px) { .lab-pair { grid-template-columns: 1fr 1.2fr; } }
+    .lab-spacer { height: 40vh; }
+    .lab-controls { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <div id="sew-full" class="lab-full"></div>
+
+    <section class="section">
+      <div class="container lab-pair">
+        <div>
+          <h2>Stitched on the bench in Sialkot</h2>
+          <p class="lede">Two layers of leather, a painted edge and a straight line of lockstitch. Scroll and the machine feeds the leather; tap it to run at full speed for a second.</p>
+          <div class="lab-controls">
+            <button class="btn btn--secondary btn--sm" data-l="oxblood">Oxblood</button>
+            <button class="btn btn--secondary btn--sm" data-l="cognac">Cognac</button>
+            <button class="btn btn--secondary btn--sm" data-t="cream">Cream thread</button>
+            <button class="btn btn--secondary btn--sm" data-t="black">Black thread</button>
+          </div>
+          <p class="lab-note">Leather Genius, Sialkot, Pakistan</p>
+        </div>
+        <div id="sew-section"></div>
+      </div>
+    </section>
+    <div class="lab-spacer"></div>
+  </main>
+
+  <script>window.LGFX_SEWING_V = String(Date.now());</script>
+  <script src="/assets/fx/sewing/module.js"></script>
+  <script>
+    var q = new URLSearchParams(location.search);
+    var big = LGFx.sewing.mount('#sew-full', { leather: q.get('leather') || 'oxblood', thread: q.get('thread') || 'cream', scrollLinked: true, camera: q.get('cam') || 'auto', eager: true, debug: q.has('debug') });
+    var opts = { leather: 'cognac', thread: 'cream', scrollLinked: true };
+    var small = LGFx.sewing.mount('#sew-section', opts);
+    document.querySelectorAll('[data-l],[data-t]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (b.dataset.l) opts.leather = b.dataset.l; if (b.dataset.t) opts.thread = b.dataset.t;
+        small.destroy(); document.getElementById('sew-section').innerHTML = '';
+        small = LGFx.sewing.mount('#sew-section', opts);
+      });
+    });
+    window.__sew = big;
+    if (q.has('perf')) {
+      big.ready.then(function () { setTimeout(function () { var n = 0, t0 = performance.now(), worst = 0, last = t0;
+        (function f(t) { n++; worst = Math.max(worst, t - last); last = t; if (t - t0 < 4000) requestAnimationFrame(f); else { var r = big.instance._three.renderer; document.body.setAttribute('data-perf', JSON.stringify({ fps: +(n / 4).toFixed(1), worst: Math.round(worst), calls: r.info.render.calls, gl: r.getContext().getParameter(r.getContext().VERSION) })); } })(t0);
+      }, 1000); });
+    }
+    if (q.has('seek') || q.has('T')) {
+      document.getElementById('sew-full').classList.add('no-fade');
+      big.seek(parseFloat(q.get('seek') || 0), { T: q.has('T') ? parseFloat(q.get('T')) : undefined, camera: q.get('cam') || undefined }).then(function () { document.documentElement.dataset.seeked = '1'; });
+    }
+  </script>
+</body>
+</html>

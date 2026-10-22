@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zipper intro | Leather Genius lab</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&amp;family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap">
+  <link rel="stylesheet" href="/assets/site.css?v=17">
+  <link rel="stylesheet" href="/assets/fx/zipper/module.css">
+  <style>
+    html, body { margin: 0; height: 100%; }
+    .lab-home { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #F6F2EA; }
+    .lab-bar {
+      position: fixed; left: 16px; bottom: 16px; z-index: 50; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      background: #F6F2EA; border: 1px solid #d9cdb8; border-radius: 12px; padding: 10px 12px; font: 15px/1.3 Bitter, Georgia, serif; color: #241A15;
+      box-shadow: 0 6px 24px rgba(36,26,21,.12); max-width: calc(100% - 32px); box-sizing: border-box;
+    }
+    .lab-bar select, .lab-bar button { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid #cdbfa8; background: #fff; color: inherit; }
+    .lab-bar button { background: #6B1F1F; color: #F6F2EA; border-color: #6B1F1F; cursor: pointer; }
+    body.hero-mode .lab-home { display: none; }
+    body.poster .lab-bar, body.poster .lgz-skip, body.poster .lab-home { display: none !important; }
+    body.poster .lgz::after { display: none; }
+    .lab-hero { display: none; }
+    body.hero-mode .lab-hero { display: block; }
+    .lab-hero .box { position: relative; height: 70vh; min-height: 420px; margin: 0 auto; max-width: 1200px; border-radius: 0; overflow: hidden; background: #F6F2EA; }
+    .lab-hero .copy { padding: 10vh 6vw; }
+  </style>
+</head>
+<body>
+  <!-- The real homepage underneath, so the intro is seen exactly where it will sit -->
+  <iframe class="lab-home" src="/" title="Homepage underneath the intro"></iframe>
+
+  <section class="lab-hero" aria-label="Hero mode demo">
+    <div class="container" style="padding:32px 16px">
+      <p>Hero mode: the jacket covers only this block.</p>
+    </div>
+    <div class="box" id="hero">
+      <div class="copy">
+        <h1 class="display">Leather Genius</h1>
+        <p class="lede">Sialkot, Pakistan. Style LG-201.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="lab-bar">
+    <label>Leather <select id="c"><option value="oxblood">Oxblood</option><option value="espresso">Espresso</option></select></label>
+    <label>Metal <select id="m"><option value="brass">Brass</option><option value="nickel">Nickel</option></select></label>
+    <label>Where <select id="w"><option value="screen">Whole screen</option><option value="hero">Hero block</option></select></label>
+    <button type="button" id="replay">Replay</button>
+  </div>
+
+  <script type="module">
+    import '/assets/fx/zipper/module.js';
+    const q = new URLSearchParams(location.search);
+    const $ = (id) => document.getElementById(id);
+    $('c').value = q.get('color') || 'oxblood';
+    $('m').value = q.get('metal') || 'brass';
+    $('w').value = q.get('where') || 'screen';
+    document.body.classList.toggle('hero-mode', $('w').value === 'hero');
+    document.body.classList.toggle('poster', q.has('poster'));
+    async function run() {
+      const el = $('w').value === 'hero' ? $('hero') : document.body;
+      const opts = { color: $('c').value, metal: $('m').value, force: true, auto: !q.has('t') };
+      await LGFx.zipper.mount(el, opts);
+      if (q.has('t')) LGFx.zipper.seek(parseFloat(q.get('t')));
+      document.documentElement.dataset.zipperReady = '1';
+    }
+    $('replay').onclick = () => { LGFx.zipper.skip(); setTimeout(run, 300); };
+    for (const id of ['c', 'm', 'w']) $(id).onchange = () => {
+      const u = new URL(location.href); u.searchParams.set('color', $('c').value); u.searchParams.set('metal', $('m').value); u.searchParams.set('where', $('w').value); u.searchParams.delete('t'); location.href = u;
+    };
+    document.addEventListener('lgzipper:done', () => { document.documentElement.dataset.doneAt = Math.round(performance.now()); });
+    run();
+  </script>
+</body>
+</html>

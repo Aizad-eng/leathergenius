@@ -965,7 +965,7 @@ h3, h4, .h3, .h4 {
    edge where the press leaves a wall facing the light. Two copies of the
    logo mask: ::before is the lip (1px lower), ::after the pressed face. */
 .deboss {
-  --h: 34px; --ratio: 1.2308;   /* mark only: 88.9 / 72.23 of logo.svg */
+  --h: 38px; --ratio: 1.2308;   /* mark only: 88.9 / 72.23 of logo.svg */
   position: relative; display: inline-block; flex: none;
   height: var(--h); width: calc(var(--h) * var(--ratio));
 }
@@ -976,9 +976,10 @@ h3, h4, .h3, .h4 {
   -webkit-mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
   mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
 }
-.deboss::before { transform: translateY(1px); background: rgba(255, 236, 214, .18); }
-.deboss::after { background: rgba(10, 6, 4, .56); }
-.site-footer__mark:hover .deboss::before { background: rgba(255, 236, 214, .28); }
+/* Hot-foil gold on the espresso leather: a shadow pressed under the foil, then the foil itself */
+.deboss::before { transform: translateY(1px); background: rgba(0, 0, 0, .55); filter: blur(.4px); }
+.deboss::after { background: linear-gradient(100deg, #9A7438 0%, #E2C27F 22%, #B88F4A 42%, #F1D99C 58%, #A9803F 78%, #D8B46E 100%); }
+.site-footer__mark:hover .deboss::after { filter: brightness(1.08); }
 @media (max-width: 420px) { .site-footer__mark .deboss { --h: 28px; } }
 
 /* Social icons: header (beside the button) and footer */
@@ -991,3 +992,12 @@ h3, h4, .h3, .h4 {
 .site-footer a.site-footer__social .social-icon { width: 22px; height: 22px; }
 .site-footer a.site-footer__social span { text-decoration: underline; text-decoration-color: rgba(237, 228, 214, .35); text-underline-offset: 4px; }
 .site-footer a.site-footer__social:hover span { text-decoration-color: currentColor; }
+
+/* Header fit: with five nav items + icons, drop the place line and tighten before things wrap */
+@media (min-width: 900px) and (max-width: 1179.98px) {
+  .brand__place { display: none; }
+  .nav__list { column-gap: 20px; }
+}
+@media (min-width: 900px) and (max-width: 1023.98px) {
+  .nav__social { display: none; }
+}

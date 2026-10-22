@@ -1,0 +1,38 @@
+/* Leather Genius FX: zipper intro */
+.lgz {
+  position: absolute; inset: 0; z-index: 60; overflow: hidden;
+  cursor: grab; user-select: none; -webkit-user-select: none;
+  transition: opacity .22s ease;
+}
+.lgz--fixed { position: fixed; z-index: 9990; }
+.lgz canvas { display: block; position: absolute; inset: 0; }
+.lgz.is-grabbing { cursor: grabbing; }
+/* soft studio falloff at the corners, fades out as the panels leave */
+.lgz::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 95% at 42% 38%, rgba(0,0,0,0) 55%, rgba(16,8,6,.38) 100%);
+  opacity: var(--lgz-vig, 1);
+}
+/* until the first WebGL frame is drawn the poster holds the closed jacket */
+.lgz.is-loading { background: #3a1013 url("poster.webp") center / cover no-repeat; }
+.lgz.is-done { opacity: 0; pointer-events: none; }
+
+.lgz-skip {
+  position: fixed; right: 16px; bottom: 16px; z-index: 9991;
+  font: 500 15px/1 "Bitter", Georgia, serif; color: #F6F2EA;
+  background: rgba(20, 12, 10, .55); border: 1px solid rgba(246, 242, 234, .35);
+  border-radius: 999px; padding: 10px 16px; cursor: pointer;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.lgz-skip--inset { position: absolute; z-index: 61; }
+.lgz-skip:hover { background: rgba(20, 12, 10, .75); }
+.lgz-skip:focus-visible { outline: 2px solid #F6F2EA; outline-offset: 2px; }
+
+/* pre-paint cover, set by the inline boot snippet so the page never flashes before the jacket */
+html.lgz-pending body::before {
+  content: ""; position: fixed; inset: 0; z-index: 9989;
+  background: #3a1013 url("poster.webp") center / cover no-repeat;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.lgz-pending body::before, .lgz, .lgz-skip { display: none !important; }
+}

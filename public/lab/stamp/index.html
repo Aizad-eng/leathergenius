@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stamp | Leather Genius lab</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&amp;family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap">
+  <link rel="stylesheet" href="/assets/site.css?v=17">
+  <link rel="stylesheet" href="/assets/fx/stamp/module.css">
+  <script type="importmap">{"imports":{"three":"/assets/vendor/three/three.module.min.js","three/addons/":"/assets/vendor/three/addons/"}}</script>
+  <style>
+    .lab-head { padding: 40px 0 20px; }
+    .lab-head h1 { margin: 0 0 8px; }
+    .lab-stage { max-width: 1280px; margin: 0 auto; padding: 0 var(--gutter, 20px); }
+    .lab-controls { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: end; margin: 18px 0 0; }
+    .lab-group { display: flex; flex-direction: column; gap: 6px; }
+    .lab-group > span { font-size: 14px; font-weight: 600; color: var(--c-muted, #6c6157); }
+    .seg { display: inline-flex; border: 1px solid #cdbfab; border-radius: 6px; overflow: hidden; }
+    .seg button { font: inherit; font-size: 15px; padding: 8px 14px; background: #fffaf2; border: 0; border-right: 1px solid #cdbfab; color: #3A322C; cursor: pointer; }
+    .seg button:last-child { border-right: 0; }
+    .seg button[aria-pressed="true"] { background: #6B1F1F; color: #F6F2EA; }
+    .cut { display: flex; gap: 8px; }
+    .cut input { font: inherit; font-size: 16px; padding: 8px 12px; border: 1px solid #cdbfab; border-radius: 6px; background: #fffaf2; width: 15em; }
+    .cut button { font: inherit; font-size: 15px; padding: 8px 16px; border-radius: 6px; border: 0; background: #241A15; color: #F6F2EA; cursor: pointer; }
+    .lab-note { font-size: 15px; color: #6c6157; margin: 12px 0 0; }
+    .lab-section { padding: 72px 0; background: #EFE9DF; margin-top: 64px; }
+    .lab-split { display: grid; gap: 36px; align-items: center; }
+    @media (min-width: 900px) { .lab-split { grid-template-columns: 5fr 7fr; } }
+    .lab-split p { max-width: 34em; }
+    html.frame body > *:not(.lab-stage), html.frame .lab-controls, html.frame .lab-note { display: none; }
+    html.frame .lab-stage { padding: 0; max-width: none; }
+    html.frame #stage { position: fixed; inset: 0; aspect-ratio: auto; border-radius: 0; }
+  </style>
+</head>
+<body>
+  <header class="container lab-head">
+    <h1>Stamp</h1>
+    <p class="lede">A brass die comes down on the leather and presses the mark in. Click the leather to stamp it again somewhere else.</p>
+  </header>
+
+  <div class="lab-stage">
+    <div id="stage"></div>
+    <div class="lab-controls">
+      <div class="lab-group"><span>Leather</span>
+        <div class="seg" data-k="leather"><button data-v="vegtan" aria-pressed="true">Veg-tan</button><button data-v="oxblood" aria-pressed="false">Oxblood</button></div>
+      </div>
+      <div class="lab-group"><span>Finish</span>
+        <div class="seg" data-k="finish"><button data-v="blind" aria-pressed="true">Blind</button><button data-v="foil" aria-pressed="false">Gold foil</button><button data-v="heat" aria-pressed="false">Heat</button></div>
+      </div>
+      <form class="lab-group" id="cut"><span>Your brand name</span>
+        <div class="cut"><input id="brand" maxlength="16" placeholder="Type up to 16 characters" autocomplete="off"><button type="submit">Cut the die and stamp</button></div>
+      </form>
+    </div>
+    <p class="lab-note">The die is cut in mirror image, so the mark reads the right way round in the leather.</p>
+  </div>
+
+  <section class="lab-section">
+    <div class="container lab-split">
+      <div>
+        <h2>Leather Genius</h2>
+        <p>Sialkot, Pakistan</p>
+        <p><a href="mailto:stella@getleathergenius.com">stella@getleathergenius.com</a></p>
+        <p class="lab-note">Example placement in a homepage section (oxblood, gold foil). The copy here is a placeholder.</p>
+      </div>
+      <div id="stage2" data-leather="oxblood" data-finish="foil"></div>
+    </div>
+  </section>
+
+  <script type="module">
+    import '/assets/fx/stamp/module.js';
+    const q = new URLSearchParams(location.search);
+    if (q.has('frame')) document.documentElement.classList.add('frame');
+    const opts = { leather: q.get('leather') || 'vegtan', finish: q.get('finish') || 'blind', text: q.get('text') || null };
+    if (q.has('cam')) { const [dist, el, az, ty, tz] = q.get('cam').split(',').map(Number); opts.camera = { dist, el, az, ty, tz }; }
+    const seekT = q.has('t') ? parseFloat(q.get('t')) : null;
+    if (seekT !== null) opts.autoplay = false;
+    const inst = LGFx.stamp.mount('#stage', opts);
+    const second = (q.has('solo') || q.has('frame')) ? null : LGFx.stamp.mount('#stage2', { leather: 'oxblood', finish: 'foil' });
+    window.lab = { inst, second };
+    if (q.has('debug')) setInterval(() => { document.title = JSON.stringify({ jt: inst.jobTime, p: inst.playing, s: inst.started, v: inst.visible, n: inst.stamps && inst.stamps.length }); }, 250);
+    inst.ready.then(() => {
+      if (seekT !== null) { inst.seek(seekT); document.documentElement.dataset.ready = '1'; }
+    });
+    document.querySelectorAll('.seg').forEach(seg => seg.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      seg.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      if (seg.dataset.k === 'leather') inst.setLeather(b.dataset.v);
+      else { inst.setFinish(b.dataset.v); inst.stamp(); }
+    }));
+    for (const k of ['leather', 'finish']) {
+      document.querySelectorAll(`.seg[data-k="${k}"] button`).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === opts[k])));
+    }
+    document.getElementById('cut').addEventListener('submit', e => {
+      e.preventDefault();
+      const v = document.getElementById('brand').value.trim();
+      if (v) inst.setText(v);
+    });
+  </script>
+</body>
+</html>
