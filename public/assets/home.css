@@ -41,11 +41,20 @@
 .hp-hero__act { margin-top: var(--s-6); }
 .hp-hero__mail { margin-top: var(--s-4); max-width: 40em; font-size: var(--t-15); color: var(--c-muted); }
 .hp-hero__fig { margin: 0; }
-/* The photo sits straight on the page colour: its white backdrop is
-   multiplied into the paper, so there is no box around the jacket. */
-.hp-hero__ph { display: block; aspect-ratio: 10 / 9; overflow: hidden; }
-.hp-hero__img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transform: scale(1.16); mix-blend-mode: multiply; }
-.hp-hero__fig .hp-cap { margin-top: 0; text-align: center; }
+/* The one leather moment on the page: the jacket photographed on a single
+   oxblood hide (one image, not a tile). The panel has a cut edge with a
+   thin darker edge-paint line, done with an inset ring over the photo. */
+.hp-hero__ph {
+  position: relative; display: block; aspect-ratio: 10 / 9; overflow: hidden;
+  border-radius: 5px; background: #4E1616;
+  box-shadow: 0 1px 2px rgba(31, 26, 23, .16), 0 18px 36px -24px rgba(31, 26, 23, .45);
+}
+.hp-hero__ph::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(28, 6, 6, .7), inset 0 0 0 2px rgba(255, 214, 196, .07);
+}
+.hp-hero__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hp-hero__fig .hp-cap { margin-top: var(--s-3); text-align: center; }
 @media (min-width: 900px) {
   .hp-hero__grid { align-items: center; }
   .hp-hero__copy { grid-column: 1 / span 6; }
@@ -68,8 +77,10 @@
 .hp-mat__table th { font-weight: 600; color: var(--c-ink); width: 44%; }
 .hp-mat__table th span { display: block; font-size: var(--t-13); font-weight: 400; color: var(--c-muted); font-variant-numeric: lining-nums tabular-nums; }
 .hp-mat__table td:last-child { color: var(--c-ink-2); padding-right: 0; }
-.hp-mat__sw { width: 52px; }
-.hp-mat__sw img { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; }
+/* Swatches: small cut rectangles of the actual materials, like a sample
+   card. A darker 1px edge (the cut edge) and a soft shadow lift them off the page. */
+.hp-mat__sw { width: 72px; }
+.hp-mat__sw img { display: block; margin-top: 2px; width: 56px; height: 40px; object-fit: cover; border-radius: 2px; outline: 1px solid rgba(31, 20, 14, .28); outline-offset: -1px; box-shadow: 0 1px 1px rgba(31, 26, 23, .14), 0 4px 10px -6px rgba(31, 26, 23, .45); }
 .hp-mat__note { margin-top: var(--s-4); font-size: var(--t-15); line-height: 1.55; color: var(--c-muted); }
 @media (min-width: 900px) {
   .hp-letter__body { grid-column: 1 / span 7; }

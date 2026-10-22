@@ -49,7 +49,7 @@
    23. Utilities ......... .visually-hidden, .text-center, .mt-0/.mt-4/.mt-6/
                            .mt-8, .mb-0, .maxw-prose, .hide-sm, .show-sm
    24. Responsive ........ breakpoints: 600px, 900px, 1100px
-   25. Wordmark ........ .deboss (flat logo mask, footer). No textures.
+   25. Wordmark ........ .deboss (blind-debossed logo, footer)
    ========================================================================== */
 
 /* 1. Tokens ---------------------------------------------------------------- */
@@ -249,6 +249,13 @@ h3, h4, .h3, .h4 {
 }
 .btn:hover, .hp-btn:hover, .cat-btn:hover, .ip-btn:hover { background: var(--c-accent-2); border-color: var(--c-accent-2); color: #FFFFFF; }
 .btn:active, .hp-btn:active, .cat-btn:active, .ip-btn:active { transform: translateY(1px); }
+/* A near-invisible pebble grain, soft-lit into the oxblood (about +/-2% in
+   lightness), so the button reads as leather up close and flat from afar. */
+.btn, .hp-btn, .cat-btn, .ip-btn {
+  background-image: url("/images/texture/grain-neutral.webp");
+  background-size: 128px 128px;
+  background-blend-mode: soft-light;
+}
 .btn--sm { min-height: 44px; padding: 10px 20px; }
 .btn--block { width: 100%; }
 
@@ -895,8 +902,10 @@ h3, h4, .h3, .h4 {
 .contact-block__v a:hover { color: var(--c-accent); }
 
 /* 22. Footer --------------------------------------------------------------- */
-/* Flat espresso, 15px text, columns on the same 12-column grid as the page. */
-.site-footer { background: var(--c-espresso); color: var(--c-on-dark-muted); font-size: var(--t-15); line-height: 1.6; padding: var(--sec) 0 var(--s-6); }
+/* Espresso calf: a fine, low-contrast grain over the flat espresso (one
+   seamless 512px tile, +/-2 levels, so no repeat shows). 15px text, columns
+   on the same 12-column grid as the page. */
+.site-footer { background: var(--c-espresso) url("/images/texture/espresso-calf-fine.webp") 0 0 / 512px 512px repeat; color: var(--c-on-dark-muted); font-size: var(--t-15); line-height: 1.6; padding: var(--sec) 0 var(--s-6); }
 .site-footer a { color: var(--c-on-dark); text-decoration: none; }
 .site-footer a:hover { color: #FFFFFF; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .site-footer__grid { display: grid; gap: var(--s-7) var(--col-gap); grid-template-columns: 1fr 1fr; }
@@ -951,10 +960,10 @@ h3, h4, .h3, .h4 {
 }
 
 /* 25. Wordmark ------------------------------------------------------------- */
-/* The footer wordmark: the logo as a flat mask, filled in the on-dark colour.
-   (The old leather layer of textures, stitching and debossing was removed in
-   Oct 2026. The only textures left on the site are the round material
-   swatches in the materials tables.) */
+/* The footer wordmark, blind-debossed into the calf: no colour of its own,
+   just the leather pressed a shade darker, with a faint lit lip on the lower
+   edge where the press leaves a wall facing the light. Two copies of the
+   logo mask: ::before is the lip (1px lower), ::after the pressed face. */
 .deboss {
   --h: 34px; --ratio: 1.2308;   /* mark only: 88.9 / 72.23 of logo.svg */
   position: relative; display: inline-block; flex: none;
@@ -962,13 +971,14 @@ h3, h4, .h3, .h4 {
 }
 .deboss--word { --ratio: 7.835; }  /* full wordmark */
 .deboss > i { display: none; }
-.deboss::after {
+.deboss::before, .deboss::after {
   content: ""; position: absolute; inset: 0;
-  background: var(--c-on-dark);
   -webkit-mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
   mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
 }
-.site-footer__mark:hover .deboss::after { background: #FFFFFF; }
+.deboss::before { transform: translateY(1px); background: rgba(255, 236, 214, .18); }
+.deboss::after { background: rgba(10, 6, 4, .56); }
+.site-footer__mark:hover .deboss::before { background: rgba(255, 236, 214, .28); }
 @media (max-width: 420px) { .site-footer__mark .deboss { --h: 28px; } }
 
 /* Social icons: header (beside the button) and footer */

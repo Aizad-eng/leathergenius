@@ -71,11 +71,12 @@
 .ip-mat tbody th { font-weight: 600; color: var(--c-ink); }
 .ip-mat td:last-child { padding-right: 0; color: var(--c-ink-2); }
 .ip-mat__w { white-space: nowrap; color: var(--c-ink-2); }
-.ip-mat__sw { width: 60px; }
-.ip-mat__sw img { display: block; width: 40px; height: 40px; object-fit: cover; border-radius: 50%; }
+/* Swatches: small cut rectangles of the actual materials, like a sample card */
+.ip-mat__sw { width: 76px; }
+.ip-mat__sw img { display: block; width: 56px; height: 40px; object-fit: cover; border-radius: 2px; outline: 1px solid rgba(31, 20, 14, .28); outline-offset: -1px; box-shadow: 0 1px 1px rgba(31, 26, 23, .14), 0 4px 10px -6px rgba(31, 26, 23, .45); }
 @media (max-width: 599px) {
   .ip-mat thead { display: none; }
-  .ip-mat tbody tr { display: grid; grid-template-columns: 52px minmax(0, 1fr); column-gap: var(--s-3); padding: var(--s-3) 0; }
+  .ip-mat tbody tr { display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: var(--s-3); padding: var(--s-3) 0; }
   .ip-mat tbody th, .ip-mat tbody td { padding: 0; }
   .ip-mat__sw { grid-row: 1 / span 3; width: auto; }
   .ip-mat tbody td.ip-mat__w { grid-column: 2; }
