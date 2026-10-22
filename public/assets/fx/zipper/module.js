@@ -744,19 +744,19 @@ async function mount(el, options = {}) {
   const z = new Zipper(el || document.body, opts);
   current = z; z.t0 = performance.now();
   z.buildDom();
-  // assets must be in within 1.6 s, otherwise reveal the page without the show
+  // assets must be in within ~5 s (the closed-jacket poster covers the page meanwhile), otherwise reveal the page without the show
   const t0 = performance.now();
   try {
     // preload grain images for the tab textures
     [z._alb, z._nor] = await Promise.all([loadImage(BASE + 'tex/leather_albedo.jpg'), loadImage(BASE + 'tex/leather_normal.jpg')]);
-    if (!opts.force && performance.now() - t0 > 1600) { z.finish(true); return null; }
+    if (!opts.force && performance.now() - t0 > 4500) { z.finish(true); return null; }
     await z.init();
   } catch (err) {
     console.warn('[LGFx.zipper] falling back:', err);
     z.finish(true); return null;
   }
   if (z.dead) return null;
-  if (!opts.force && performance.now() - t0 > 1800) { z.finish(true); return null; }
+  if (!opts.force && performance.now() - t0 > 5000) { z.finish(true); return null; }
   z.start();
   return z;
 }
