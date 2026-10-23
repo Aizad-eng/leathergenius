@@ -189,3 +189,16 @@
   .hp-craft__item--wide { grid-row: span 2; }
 }
 @media (max-width: 599.98px) { .hp-craft { padding: 64px 0; } }
+
+/* Rebrand: hero eyebrow/sub + proof strip ------------------------------- */
+.hp-hero__eyebrow { margin-bottom: var(--s-4); font-size: var(--t-13); font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--c-brass-2, #8C6D3F); }
+.hp-hero__eyebrow::before { content: ""; display: inline-block; width: 28px; height: 1px; margin-right: 12px; vertical-align: middle; background: var(--c-brass, #B08D57); }
+.hp-hero__title { color: var(--c-accent, #6B1E1E); }
+.hp-hero__sub { margin-top: var(--s-4); max-width: 30em; font-size: var(--t-20); font-weight: 600; line-height: 1.4; color: var(--c-ink, #2A1A14); }
+.hp-hero__lede { font-size: var(--t-17); }
+.hp-btn { box-shadow: inset 0 -2px 0 rgba(0,0,0,.18), 0 0 0 1px var(--c-brass, #B08D57); }
+.hp > .hp-proof { padding: 0; border-top: 0; background: var(--c-accent, #6B1E1E); color: #F6EFE4; }
+.hp > .hp-proof + section { border-top: 0; }
+.hp-proof__list { list-style: none; margin: 0; padding: 18px 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px 24px; font-size: var(--t-13); line-height: 1.35; color: rgba(246,239,228,.82); }
+.hp-proof__list strong { display: block; font-family: var(--f-mark); font-size: var(--t-20); font-weight: 700; letter-spacing: .03em; color: #E8C98E; }
+@media (min-width: 900px) { .hp-proof__list { grid-template-columns: repeat(5, minmax(0,1fr)); } .hp-proof__list li + li { border-left: 1px solid rgba(176,141,87,.45); padding-left: 20px; } }
