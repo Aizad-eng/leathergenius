@@ -40,7 +40,7 @@
   <link rel="stylesheet" href="/assets/fx/zipper/module.css?v=1">
   <link rel="stylesheet" href="/assets/fx/stamp/module.css?v=1">
   <link rel="stylesheet" href="/assets/fx/sewing/module.css?v=1">
-  <link rel="stylesheet" href="/assets/redesign.css?v=1">
+  <link rel="stylesheet" href="/assets/redesign.css?v=4">
   <script type="importmap">{"imports":{"three":"/assets/vendor/three/three.module.min.js","three/addons/":"/assets/vendor/three/addons/"}}</script>
   <link rel="modulepreload" href="/assets/vendor/three/three.module.min.js">
   <script src="/assets/site.js?v=4" defer></script>
@@ -76,20 +76,22 @@
 <main id="main" class="hp">
 
   <!-- 1. Hero -->
-  <section class="hp-hero rd-hero" aria-labelledby="hero-title">
-    <div class="container rd-hero__grid">
-      <div class="rd-hero__copy">
-        <h1 id="hero-title" class="rd-hero__title">Leather jackets, made for <em>your</em> brand.</h1>
-        <p class="rd-hero__sub">Private-label leather jackets for clothing brands.</p>
-        <div class="rd-hero__act">
-          <a class="rd-btn rd-btn--primary" href="/sample/">Request a free sample</a>
-        </div>
+  <section class="hp-hero v3-hero" aria-labelledby="hero-title">
+    <div class="container v3-hero__grid">
+      <div class="v3-hero__copy">
+        <h1 id="hero-title" class="v3-hero__title">Leather jackets, made for <em>your</em> brand.</h1>
+        <p class="v3-hero__sub">Private-label leather jackets for clothing brands.</p>
+        <a class="rd-btn rd-btn--light" href="/sample/">Request a free sample</a>
       </div>
-      <figure class="rd-hero__fig">
-        <img src="/images/hero-a2-hide.webp" alt="Brown lambskin A2 bomber jacket with a rib-knit hem and cuffs" width="840" height="756" fetchpriority="high">
-        <figcaption>Our lambskin A2 bomber (style LG-201) in vintage brown.</figcaption>
+      <figure class="v3-hero__fig">
+        <img src="/images/hero-a2-hide.webp" alt="Brown lambskin A2 bomber jacket" width="840" height="756" fetchpriority="high">
       </figure>
     </div>
+  </section>
+
+  <!-- Marquee -->
+  <section class="v3-marquee" aria-label="Some of our jackets">
+    <div class="v3-marquee__track"><ul><li><img src="/images/v3/m-black-biker-skeleton.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-distressed-cafe-racer.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-b3-shearling-bomber.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-letterman.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-suede-trucker-tan.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-m65-field-black.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-leather-blazer.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-western-fringe.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-g1-flight-navy.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-stand-collar-racer-black.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-lambskin-a2-bomber.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-cropped-biker-sage.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-trench-duster.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-harrington.webp" alt="" loading="lazy" height="260"></li></ul><ul aria-hidden="true"><li><img src="/images/v3/m-black-biker-skeleton.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-distressed-cafe-racer.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-b3-shearling-bomber.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-letterman.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-suede-trucker-tan.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-m65-field-black.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-leather-blazer.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-western-fringe.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-g1-flight-navy.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-stand-collar-racer-black.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-lambskin-a2-bomber.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-cropped-biker-sage.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-trench-duster.webp" alt="" loading="lazy" height="260"></li><li><img src="/images/v3/m-harrington.webp" alt="" loading="lazy" height="260"></li></ul></div>
   </section>
 
   <!-- What we make -->
@@ -97,17 +99,25 @@
     <div class="container">
       <header class="rd-head"><h2 id="make-title">Jackets first. Bags too.</h2></header>
       <div class="rd-make__grid">
-        <a class="rd-make__card" href="/catalogue/#bikers-racers"><img src="/images/catalogue/black-biker-skeleton.jpg" alt="" loading="lazy" width="863" height="876"><h3>Bikers &amp; racers</h3><p>Cowhide and steer, 1.1&ndash;1.4 mm.</p></a>
-        <a class="rd-make__card" href="/catalogue/#bombers-flight"><img src="/images/catalogue/b3-shearling-bomber-900.jpg" alt="" loading="lazy" width="600" height="900"><h3>Bombers &amp; shearling</h3><p>Lambskin A2s to full-shearling B3s.</p></a>
-        <a class="rd-make__card" href="/catalogue/#field-everyday"><img src="/images/catalogue/suede-trucker-tan.png" alt="" loading="lazy" width="715" height="865"><h3>Truckers, field &amp; blazers</h3><p>Suede, goat, lambskin, or twill.</p></a>
-        <a class="rd-make__card" href="/sample/"><img src="/images/hero-a2-bomber.jpg" alt="" loading="lazy"><h3>Bags &amp; small goods</h3><p>Send the piece or describe it.</p></a>
+        <a class="rd-make__card reveal" href="/catalogue/#bikers-racers"><img src="/images/catalogue/black-biker-skeleton.jpg" alt="" loading="lazy" width="863" height="876"><h3>Bikers &amp; racers</h3><p>Cowhide and steer, 1.1&ndash;1.4 mm.</p></a>
+        <a class="rd-make__card reveal" href="/catalogue/#bombers-flight"><img src="/images/catalogue/b3-shearling-bomber-900.jpg" alt="" loading="lazy" width="600" height="900"><h3>Bombers &amp; shearling</h3><p>Lambskin A2s to full-shearling B3s.</p></a>
+        <a class="rd-make__card reveal" href="/catalogue/#field-everyday"><img src="/images/catalogue/suede-trucker-tan.png" alt="" loading="lazy" width="715" height="865"><h3>Truckers, field &amp; blazers</h3><p>Suede, goat, lambskin, or twill.</p></a>
+        <a class="rd-make__card reveal" href="/sample/"><img src="/images/hero-a2-bomber.jpg" alt="" loading="lazy"><h3>Bags &amp; small goods</h3><p>Send the piece or describe it.</p></a>
       </div>
     </div>
   </section>
 
+  <!-- Detail break -->
+  <section class="v3-detail" aria-label="Details">
+    <figure class="reveal"><img src="/images/v3/detail-collar.webp" alt="Shearling collar on a brown leather B3 bomber" loading="lazy" width="1200" height="720"><figcaption>Shearling, set by hand.</figcaption></figure>
+    <figure class="reveal"><img src="/images/v3/detail-quilt.webp" alt="Waxed brown leather with zipped chest pockets" loading="lazy" width="1200" height="800"><figcaption>Waxed cowhide, metal zips.</figcaption></figure>
+  </section>
+
   <!-- How it works -->
-  <section class="rd-steps" aria-labelledby="steps-title">
-    <div class="container">
+  <section class="rd-steps v3-steps" aria-labelledby="steps-title">
+    <div class="container v3-steps__grid">
+      <figure class="v3-steps__img reveal"><img src="/images/v3/detail-zip.webp" alt="Close-up of a zipped sleeve on a black leather biker jacket" loading="lazy" width="1200" height="697"></figure>
+      <div>
       <header class="rd-head"><h2 id="steps-title">From your idea to your label, in four steps.</h2></header>
       <ol class="rd-steps__list">
         <li><h3>Send a style</h3><p>Post a piece you already sell, or describe it by email. We agree hide, lining, hardware and finish.</p></li>
@@ -115,6 +125,7 @@
         <li><h3>Quote &amp; order</h3><p>Landed-cost tiers at 100 to 2,500 units. 50% deposit to start.</p></li>
         <li><h3>Make, inspect, ship</h3><p>4&ndash;6 weeks. Every run inspected before it ships; balance due on shipment.</p></li>
       </ol>
+      </div>
     </div>
   </section>
 
@@ -376,6 +387,10 @@
 <script type="module">
   import '/assets/fx/zipper/module.js?v=3';
   LGFx.zipper.mount(document.body, { color: 'oxblood', metal: 'brass' });
+</script>
+<script>
+(function(){var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('is-in')});return;}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});els.forEach(function(e){io.observe(e)});})();
 </script>
 </body>
 </html>
