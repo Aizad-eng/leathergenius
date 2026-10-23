@@ -976,8 +976,8 @@ h3, h4, .h3, .h4 {
 .deboss > i { display: none; }
 .deboss::before, .deboss::after {
   content: ""; position: absolute; inset: 0;
-  -webkit-mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
-  mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
+  -webkit-mask: url("/images/logo.svg?v=3") 0 0 / auto 100% no-repeat;
+  mask: url("/images/logo.svg?v=3") 0 0 / auto 100% no-repeat;
 }
 /* Hot-foil gold on the espresso leather: a shadow pressed under the foil, then the foil itself */
 .deboss::before { transform: translateY(1px); background: rgba(0, 0, 0, .55); filter: blur(.4px); }

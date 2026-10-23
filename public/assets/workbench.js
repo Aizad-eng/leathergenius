@@ -508,7 +508,7 @@
     gl.generateMipmap(gl.TEXTURE_2D);
   }
 
-  // LG mark for the zip pull (white on black).
+  // Hide mark for the zip pull (white on black).
   var T_MARK = tex(128, 128);
   var markImg = new Image(), wordImg = new Image();
   var marksReady = 0;
@@ -527,8 +527,8 @@
       dirty = true;
     }
   };
-  markImg.src = '/favicon.svg?v=2';
-  wordImg.src = '/images/logo.svg?v=2';
+  markImg.src = '/favicon.svg?v=3';
+  wordImg.src = '/images/logo.svg?v=3';
 
   // Draw `src` softened by about `r` px (filter blur where supported, else a small kernel).
   var hasFilter = typeof mkCanvas(1, 1).getContext('2d').filter === 'string';
