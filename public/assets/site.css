@@ -1016,3 +1016,7 @@ h3, h4, .h3, .h4 {
 .footer-lockup__word { display: inline-flex; flex-direction: column; font-family: var(--f-mark); font-weight: 700; font-size: 26px; letter-spacing: .06em; line-height: 1; color: #E8D3A6; }
 .footer-lockup__tag { margin-top: 6px; font-family: var(--f-body); font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: var(--c-brass); }
 .site-footer__mark { text-decoration: none; }
+
+/* v2: no tracked all-caps labels anywhere (product mock-ups excepted) */
+body *:not(.mark__art):not(.hangtag__mark):not(.dustbag):not(.dustbag *):not(.giftbox):not(.giftbox *):not(.brand__word):not(.footer-lockup__word){text-transform:none!important;letter-spacing:normal!important;}
+.eyebrow::before,.eyebrow::after,.hp-hero__eyebrow::before{content:none!important;display:none!important;}
