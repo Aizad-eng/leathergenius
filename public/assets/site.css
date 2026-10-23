@@ -55,25 +55,28 @@
 /* 1. Tokens ---------------------------------------------------------------- */
 :root {
   /* Colour: one flat page colour, one band tint, hairlines. No textures. */
-  --c-paper: #F6F2EA;        /* page background */
-  --c-paper-2: #EFE9DF;      /* the one band tint */
+  --c-paper: #F6EFE4;        /* page background */
+  --c-paper-2: #EEE4D4;      /* the one band tint */
   --c-paper-3: #E6DCCB;
   --c-white: #FFFDF9;        /* form field fill */
-  --c-photo: #F6F2EA;
-  --c-ink: #1F1A17;          /* headings */
-  --c-ink-2: #3A322C;        /* body text */
+  --c-photo: #F6EFE4;
+  --c-ink: #2A1A14;          /* headings */
+  --c-ink-2: #3B2A22;        /* body text */
   --c-muted: #6B6159;        /* captions, meta */
   --c-line: #DDD3C5;         /* hairlines */
   --c-line-2: #CFC4B5;       /* field borders, stronger rule */
-  --c-tan: #B48C62;
-  --c-accent: #6B1F1F;       /* oxblood, the single accent */
+  --c-tan: #B08D57;
+  --c-accent: #6B1E1E;       /* oxblood, the single accent */
   --c-accent-2: #561818;
   --c-accent-tint: #F1E3DE;
-  --c-espresso: #261C17;     /* footer */
+  --c-espresso: #2A1A14;     /* footer */
   --c-espresso-2: #33261F;
   --c-on-dark: #EDE4D6;
   --c-on-dark-muted: #B9AC9B;
   --c-focus: #B5562E;
+  --c-brass: #B08D57;         /* antique brass, from the logo zip */
+  --c-brass-2: #8C6D3F;
+  --f-mark: "Cormorant SC", "Cormorant Garamond", "Times New Roman", Georgia, serif;  /* wordmark only */
 
   /* Type: Alfa Slab One for page and section headings only, Bitter for the rest */
   --f-serif: "Alfa Slab One", "Rockwell", "Roboto Slab", Georgia, serif;
@@ -973,8 +976,8 @@ h3, h4, .h3, .h4 {
 .deboss > i { display: none; }
 .deboss::before, .deboss::after {
   content: ""; position: absolute; inset: 0;
-  -webkit-mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
-  mask: url("/images/logo.svg?v=2") 0 0 / auto 100% no-repeat;
+  -webkit-mask: url("/images/logo.svg?v=3") 0 0 / auto 100% no-repeat;
+  mask: url("/images/logo.svg?v=3") 0 0 / auto 100% no-repeat;
 }
 /* Hot-foil gold on the espresso leather: a shadow pressed under the foil, then the foil itself */
 .deboss::before { transform: translateY(1px); background: rgba(0, 0, 0, .55); filter: blur(.4px); }
@@ -1001,3 +1004,15 @@ h3, h4, .h3, .h4 {
 @media (min-width: 900px) and (max-width: 1023.98px) {
   .nav__social { display: none; }
 }
+
+/* 26. Brand lockup (hide mark + live serif wordmark) ---------------------- */
+.brand__mark { height: 34px; width: auto; flex: none; }
+.brand__word { display: inline-flex; flex-direction: column; margin-left: 10px; font-family: var(--f-mark); font-weight: 700; font-size: 22px; letter-spacing: .06em; line-height: 1; color: var(--c-accent); white-space: nowrap; }
+.brand__tag { margin-top: 4px; font-family: var(--f-body); font-weight: 500; font-size: 9.5px; letter-spacing: .32em; text-transform: uppercase; color: var(--c-brass-2); }
+@media (min-width: 900px) { .brand__mark { height: 42px; } .brand__word { font-size: 25px; } }
+@media (max-width: 359.98px) { .brand__word { font-size: 19px; } }
+.footer-lockup { display: inline-flex; align-items: center; gap: 12px; }
+.footer-lockup__mark { height: 46px; width: auto; }
+.footer-lockup__word { display: inline-flex; flex-direction: column; font-family: var(--f-mark); font-weight: 700; font-size: 26px; letter-spacing: .06em; line-height: 1; color: #E8D3A6; }
+.footer-lockup__tag { margin-top: 6px; font-family: var(--f-body); font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: var(--c-brass); }
+.site-footer__mark { text-decoration: none; }
